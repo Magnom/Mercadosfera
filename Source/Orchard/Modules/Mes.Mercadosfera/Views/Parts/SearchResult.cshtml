@@ -1,0 +1,106 @@
+﻿@using System.Web.Mvc.Html
+
+@{    
+    Style.Require("Mes.Search").AtHead();
+    Style.Require("jQueryUI_Orchard").AtHead();
+    Script.Require("jQueryUI_Tabs").AtHead();
+    Script.Include("knockout-2.3.0.js");    
+}
+
+<script type="text/javascript">
+  
+</script>
+
+<div class="row">
+    <div class="col-md-3 searchFilters" id="filters_ctn">
+        <div class="text">
+            <h3>Categoria</h3>
+        </div>
+        <div class="clearer"></div>
+        <div class="containerCateory" data-bind="foreach: { data: MesSearchObject.Instance().CatagoryFilter }">
+            <!-- ko if: true -->
+            <span onclick="desplegar(this)" class="pointer" data-bind="attr: { id: 'desp_' + idCategoria }">+</span>
+            <!-- /ko -->
+            <label>
+                <input type="checkbox" class="categoria"  name="checkbox" onclick="MesFilter('c', $(this).val(), this)" data-bind="    attr: { value: idCategoria, id: 'c' + idCategoria }"><span data-bind="    text: DescCategoria">&nbsp;</span></label><div class="clearer"></div>
+
+            <div class="subcat" data-bind="attr: { value: $data.idCategoria, id: 'subcat_' + $data.idCategoria }">
+                <div class="containerCateory" data-bind="foreach: { data: Subcategorias }">
+                    <label>
+                        <input type="checkbox" class="subcategoria" name="checkbox" onclick="MesFilter('sc', $(this).val(), this)" data-bind="    attr: { value: idSubcategoria }"><span data-bind="    text: DescSubcategoria">&nbsp;</span></label><div class="clearer"></div>
+                </div>
+            </div>
+
+
+        </div>
+        <div class="text">
+            <h3>Zona</h3>
+        </div>
+        <div class="clearer"></div>
+        <div class="containerZone" data-bind="foreach: { data: MesSearchObject.Instance().ZoneFilter }">
+            <label>
+                <input type="checkbox" class="categoria" name="checkbox" onclick="MesFilter('z', $(this).val(), this)" data-bind="    attr: { value: $data.idCategoria, id: 'z' + idCategoria }"><span data-bind="    text: $data.DescCategoria">&nbsp;</span></label><div class="clearer"></div>
+        </div>
+
+        <div class="text">
+            <span>
+                <h3>Precio</h3>
+            </span>
+        </div>
+
+        <div class="text">
+            <h3>Tienda</h3>
+        </div>
+        <div class="clearer"></div>
+        <div class="containerZone" data-bind="foreach: { data: MesSearchObject.Instance().StoreFilter }">
+            <label>
+                <input type="checkbox" class="categoria" name="checkbox" onclick="MesFilter('t', $(this).val(), this)" data-bind="    attr: { value: $data.idCategoria, id: 't' + idCategoria }"><span data-bind="    text: $data.DescCategoria">&nbsp;</span></label><div class="clearer"></div>
+        </div>
+    </div>
+
+    <div class="col-md-9">
+
+
+        <div data-bind="foreach: { data: MesSearchObject.Instance().Products }">
+
+            <div class="productItem">
+                <div class="productThumbnail">
+                    <img data-bind="attr: { src: $data.ProductPicture }" />
+                </div>
+                <div class="clearer"></div>
+                <div class="descProduct">
+                    <span data-bind="text: $data.TitleProduct">&nbsp;</span>
+                </div>
+                <div class="clearer"></div>
+                <div class="descStore">
+                    <span data-bind="text: $data.DescStore">&nbsp;</span>
+                </div>
+                <div class="price">
+                    <span data-bind="text: $data.Price">&nbsp;</span>
+                </div>
+                <div class="clearer"></div>
+            </div>
+
+
+        </div>
+
+    </div>
+
+</div>
+
+@{ 
+    Script.Include("Mes.Vars.js");
+    Script.Include("Mes.Core.js");
+    Script.Include("Mes.ProductSearch.js");       
+}
+
+
+<script>
+    $(document).ready(function () {
+
+        Inicializa();
+        
+    });
+
+
+</script>

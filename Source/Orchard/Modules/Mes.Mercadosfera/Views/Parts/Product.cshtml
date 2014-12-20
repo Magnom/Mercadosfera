@@ -1,0 +1,89 @@
+﻿@using System.Web.Mvc.Html
+
+@{        
+    Style.Require("Mes.ProductDetail").AtHead();
+    Style.Require("jQueryUI_Orchard").AtHead();
+    Script.Require("jQueryUI_Tabs").AtHead();
+    Script.Include("knockout-2.3.0.js");    
+}
+
+<br />
+<br />
+<br />
+<br />
+<div class="productDetail" data-bind="foreach: { data: MesProductObject.Instance().Producto }">
+
+<div class="row">
+    <div class="col-md-8">
+        fotos de otros porductos
+        </div>
+    <div class="col-md-4 storeNameAndRatting">
+               
+                <div  data-bind="foreach: { data: MesProductObject.Instance().Tienda}">
+                     <h2>
+                    <span data-bind="text: $data.Descripcion">&nbsp;</span>
+                    </h2>
+                    <div class="storeRatting"><span data-bind="text: $data.ratting">&nbsp;</span></div>
+                </div>
+
+
+                
+            
+    </div>
+</div>
+<div class="row">
+    <div class="col-md-8">
+        <div class="proPitures">
+           <div class="containerCateory" data-bind="foreach: { data: MesProductObject.Instance().ProductoImagenes }">
+                   <img data-bind="attr: { src: $data.Url }" width="200px" height="200px"/>
+                </div>   
+        </div>
+       
+       
+       
+    </div>
+    <div class="col-md-4">
+        <div class="precio">
+            Precio
+            <button type="button" class="btn btn-default btn-lg">
+              Agregar a la cesta
+            </button>
+        </div>
+    </div>
+</div>
+<div class="row">
+    <div class="col-md-12">
+        <div class="back">
+            <br />
+           <ul class="nav nav-tabs">
+              <li class="active"><a href="#desc" onclick=" $('.comments-1').hide();" data-toggle="tab">Descripcion</a></li>
+              <li><a href="#valoracion" onclick=" $('.comments-1').show();" data-toggle="tab">Valoracion/Comentarios</a></li>
+              <li><a href="#envio" data-toggle="tab"  onclick=" $('.comments-1').hide();">Envio y política</a></li>              
+            </ul>
+
+            <!-- Tab panes -->
+            <div class="tab-content">
+              <div class="tab-pane active tabBottom" id="desc"><span data-bind="html: $data.Descripcion">&nbsp;</span></div>
+              <div class="tab-pane tab-valoracion" id="valoracion" ></div>
+              <div class="tab-pane tabBottom" id="envio">Envio</div>
+              
+            </div>
+        </div>
+    </div>
+</div>
+
+   </div>
+@{ 
+    Script.Include("Mes.Vars.js");
+    Script.Include("Mes.Core.js");
+    Script.Include("Mes.ProductDetail.js");       
+}
+
+<script>
+    $(document).ready(function () {
+
+        Inicializa();
+    });
+
+
+</script>

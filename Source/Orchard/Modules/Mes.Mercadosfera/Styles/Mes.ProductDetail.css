@@ -1,0 +1,30 @@
+﻿.storeProducts {
+    
+
+}
+.storeName {
+    float:right;
+}
+.storeRatting
+{
+    float: right;
+    font-size: 25pt;
+    display: inline;
+    /* position: absolute; */
+    margin-top: -60px;
+}
+
+.storeName {
+    /*border:1px solid #808080;*/
+    width:250px
+
+
+}
+.storeNameAndRatting {
+        /*border:1px solid #808080;*/
+}
+
+.precio {
+    border:1px solid #000;
+    height:200px
+}

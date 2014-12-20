@@ -1,0 +1,24 @@
+﻿.carrito {
+		width: 45px;
+		height: 45px;
+		background-image: url('./img/carrito.png');			
+		background-size: 45px;
+		background-repeat: no-repeat;				
+		z-index: 99999;
+		position: fixed;
+		display: inline-grid;
+		right: 30px;
+		position:absolute;
+        top: 5px;
+	}
+
+
+@media (max-width: 768px) {
+    .carrito {
+        	right: 100px;
+    }
+
+    .zone-header {
+        min-width:300px;
+    }
+}

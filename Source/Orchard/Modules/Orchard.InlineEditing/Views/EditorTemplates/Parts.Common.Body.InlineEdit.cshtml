@@ -1,0 +1,37 @@
+﻿@using Orchard.Environment.Descriptor.Models
+@using Orchard.InlineEditing
+@using Orchard.Core.Common.Models
+@using Orchard.Core.Common.Settings
+@using Orchard.Core.Common.ViewModels
+
+@{
+    var part = (BodyPart)Model.DisplayShape.ContentPart;
+    var typePartSettings = part.Settings.GetModel<BodyTypePartSettings>();
+
+    var flavor = (typePartSettings != null && !string.IsNullOrWhiteSpace(typePartSettings.Flavor))
+                       ? typePartSettings.Flavor
+                       : part.PartDefinition.Settings.GetModel<BodyPartSettings>().FlavorDefault;
+    
+    var shellDescriptor = WorkContext.Resolve<ShellDescriptor>();
+
+    var viewModel = new BodyEditorViewModel {
+        BodyPart = part,
+        EditorFlavor = flavor,
+        AddMediaPath = "/"
+    };
+    
+    if (flavor.Equals("html", StringComparison.InvariantCultureIgnoreCase)) {
+        if (shellDescriptor.Features.Any(x => x.Name == "TinyMce")) {
+            viewModel.EditorFlavor = viewModel.EditorFlavor + "__tinymce";
+        }
+    }
+    if (flavor.Equals("markdown", StringComparison.InvariantCultureIgnoreCase)) {
+        if (shellDescriptor.Features.Any(x => x.Name == "Markdown")) {
+            viewModel.EditorFlavor = viewModel.EditorFlavor + "__markdown";
+        }
+    }
+}
+
+@using (Html.InlineEdit(this)) {
+    @Display.Body_Editor(viewModel)
+}

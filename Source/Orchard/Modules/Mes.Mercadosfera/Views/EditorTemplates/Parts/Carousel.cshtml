@@ -1,0 +1,91 @@
+﻿@using System.Web.Mvc.Html
+@model Mes.Mercadosfera.Models.CarouselPart
+@{
+    Style.Require("Carousel").AtHead();
+    Style.Require("jQueryUI_Orchard").AtHead();
+    Script.Require("jQueryUI_Tabs").AtHead();
+    Script.Include("knockout-2.3.0.js");    
+}
+
+<script type="text/javascript">
+    var carousel;
+
+    function FilmsViewModel() {
+        carousel = ko.observableArray();
+        //$.getJSON(ServiceUrl + "idCarousel=@Model.IdCarousel", carousel);
+    }
+
+    function cargaFinalizada() {
+    }
+
+
+</script>
+<style>
+
+    .botonesCarousel {
+        float:right;
+        padding-right:5px;
+    }
+
+    .edit-item-sidebar {
+           padding-left:11px
+    }
+</style>
+
+@Html.EditorFor(m => m.Datos)
+
+<div class="right">
+        <input id="btnAdd" class="button" onclick="seleccionar(this);return false;" type="button" value="Agregar" />
+    </div>
+
+<div class="carouselItems">
+    <h2>Elementos del carousel:</h2>    
+    <div id="carousel">
+        <div id="contenidos">
+            <div id="content" class="container" data-bind="foreach: { data: carousel, afterRender: cargaFinalizada}">
+                <div class="carouselItem">
+                    <div class="botonesCarousel">
+                        <a href="#" onclick="eliminar(this)" class="editar">Editar</a><a href="#" onclick="eliminar(this)" class="eliminar">Eliminar</a>
+                    </div>
+                    <div class="image">
+                        <img width="300px" height="300px" data-bind="attr:{src: url}" />
+                    </div>
+                    <div class="text"><span data-bind="text: $data.Descripcion">&nbsp;</span></div>
+                    <div class="text">Orden:<span data-bind="text: $data.Orden">&nbsp;</span></div>
+                    <div class="text">Clase:<span data-bind="text: $data.Clase">&nbsp;</span></div>
+                </div>
+                <hr />
+            </div>
+        </div>
+    </div>    
+</div>
+
+
+
+<div id="miVentana" style="position: fixed; width: 350px; height: 190px; top: 0; left: 0; font-family:Verdana, Arial, Helvetica, sans-serif; font-size: 12px; font-weight: normal; border: #333333 3px solid; background-color: #FAFAFA; color: #000000; display:none;">
+    <div id="miVentana_contenido"></div>
+</div>
+
+@{ 
+    Script.Include("Mes.Carousel.js");
+}
+
+
+<script>
+    $(document).ready(function () {
+        ocultaCampos();
+        ko.applyBindings(new FilmsViewModel());
+        $("#Carousel_Datos").hide();
+        var d = $("#Carousel_Datos").val();
+        if (d != "") {
+            var valores = JSON.parse(d);
+            //eval($("#CarouselPage_Orden_Value").val());
+            for (i = 0; i < valores.length; i++) {
+                carousel.push(valores[i]);
+            }
+        }
+            //carousel.push(obj);
+    });
+
+
+</script>

@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+ <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <!-- Diagram content (shape and connector positions) -->
+    <edmx:Diagrams>
+      <Diagram DiagramId="4b3c1a513a9241ba81e2079fdce77e16" Name="Diagram1" ZoomLevel="57">
+        <EntityTypeShape EntityType="MesModel.CERTIFICADOS" Width="1.5" PointX="5.9462248915556" PointY="9.207321588512194" />
+        <EntityTypeShape EntityType="MesModel.COMUNIDADES" Width="1.5" PointX="10.487818557064895" PointY="23.898898523253806" />
+        <EntityTypeShape EntityType="MesModel.DES_TIPOTEXTO" Width="1.5" PointX="10.340832133936152" PointY="19.146243938778639" />
+        <EntityTypeShape EntityType="MesModel.FORMATOS" Width="1.5" PointX="4.275556042918728" PointY="4.7950850300467973" />
+        <EntityTypeShape EntityType="MesModel.IMAGENES_PRODUCTOS" Width="1.5" PointX="6.8044475888854112" PointY="26.261387256095833" />
+        <EntityTypeShape EntityType="MesModel.LOCALIDADES" Width="1.5" PointX="4.2144195699200129" PointY="0.992666751608563" />
+        <EntityTypeShape EntityType="MesModel.PAISES" Width="1.5" PointX="2.0420789187970008" PointY="9.1716798884662243" />
+        <EntityTypeShape EntityType="MesModel.sysdiagrams" Width="1.5" PointX="0.041064435635257718" PointY="27.235475254820415" />
+        <EntityTypeShape EntityType="MesModel.TIPOCERTIFICADO" Width="1.5" PointX="10.091048357119341" PointY="13.476607776003242" />
+        <EntityTypeShape EntityType="MesModel.TIPOPRODUCTO" Width="1.5" PointX="3.0336135453701085" PointY="27.507458207899454" />
+        <AssociationConnector Association="MesModel.FK_CERTIFICADOS_TIPOCERTIFICADO" />
+        <AssociationConnector Association="MesModel.FK_COMUNIDADES_PAISES" />
+        <AssociationConnector Association="MesModel.FK_LOCALIDADES_COMUNIDADES" />
+        <EntityTypeShape EntityType="MesModel.CATEGORIAS_TIPOSPRODUCTO" Width="1.5" PointX="10.059856797596373" PointY="16.248880960163138" />
+        <EntityTypeShape EntityType="MesModel.PRODUCTOS" Width="1.5" PointX="8.1849455163744018" PointY="0.14061075455537567" />
+        <EntityTypeShape EntityType="MesModel.TIENDAS" Width="1.5" PointX="15.75" PointY="15.875" />
+        <EntityTypeShape EntityType="MesModel.TIENDAS_TEXTOS" Width="1.5" PointX="0.153008792620622" PointY="5.1805675351901757" />
+        <AssociationConnector Association="MesModel.FK_PRODUCTOS_CERTIFICADOS" />
+        <AssociationConnector Association="MesModel.FK_VENDEDOR_TEXTOS_DES_TIPOTEXTO" />
+        <AssociationConnector Association="MesModel.FK_PRODUCTOS_FORMATOS" />
+        <AssociationConnector Association="MesModel.FK_VENDEDORES_LOCALIDADES" />
+        <AssociationConnector Association="MesModel.FK_PRODUCTOS_TIPOPRODUCTO" />
+        <AssociationConnector Association="MesModel.FK_VENDEDOR_TEXTOS_VENDEDORES" />
+        <EntityTypeShape EntityType="MesModel.VENDEDORES" Width="1.5" PointX="7.1701022364059934" PointY="12.180849736640626" />
+        </Diagram>
+    </edmx:Diagrams>
+  </edmx:Designer>
+</edmx:Edmx>

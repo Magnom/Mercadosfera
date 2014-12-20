@@ -1,0 +1,42 @@
+﻿.searchInput {  
+    position: absolute;
+    width: 700px;
+    margin-left: -350px;
+    margin-right: auto;
+    top: 65px;
+    left: 50%;
+    outline: none;
+    border-color: #2a8a15;
+    /* box-shadow: 0 0 10px #2a8a15; */
+    color: #2a8a15;
+}
+
+.lupa {
+        width: 70px;
+		height: 70px;
+		background-image: url('./img/carrito.png');			
+}
+
+#searchText {
+    width:350px;
+    height:40px;
+    margin-top:-6px;
+     outline: none;
+    border-color: #2a8a15;
+    /*box-shadow: 0 0 10px #2a8a15;*/
+    color: #2a8a15;
+    
+}
+
+
+
+#searchText:hover {
+    width:350px;
+    height:40px;
+    margin-top:-6px;
+     outline: none;
+    border-color: #2a8a15;
+    box-shadow: 0 0 10px #2a8a15;
+    color: #2a8a15;
+    
+}

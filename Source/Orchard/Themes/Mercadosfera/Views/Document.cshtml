@@ -1,0 +1,76 @@
+@using Mercadosfera.Services;
+@using Orchard.Mvc.Html;
+@using Orchard.UI.Resources;
+@{
+    var settings = WorkContext.Resolve<IThemeSettingsService>().GetSettings();
+
+    RegisterLink(new LinkEntry { Type = "image/x-icon", Rel = "shortcut icon", Href = Url.Content("~/Themes/Mercadosfera/Content/ico/favicon.ico") });
+    
+    Style.Include("responsive.css");
+    Style.Include("style.css");
+    Style.Include("bootstrap.css");
+    Style.Include("carousel.css");
+    Script.Require("jQuery").AtHead();
+    Style.Include("custom.css");
+    
+    string title = Convert.ToString(Model.Title);
+    string siteName = Convert.ToString(WorkContext.CurrentSite.SiteName);
+}
+<!DOCTYPE html>
+
+
+<html lang="@WorkContext.CurrentCulture" class="csstransforms csstransforms3d csstransitions js_active  vc_desktop  vc_transform ">
+
+
+<head>
+    <link rel="apple-touch-icon" href="@Href(Html.ThemePath(WorkContext.CurrentTheme, "/Content/ico/apple-touch-icon.png"))">
+    <link rel="apple-touch-icon" sizes="72x72" href="@Href(Html.ThemePath(WorkContext.CurrentTheme, "/Content/ico/apple-touch-icon-72.png"))">
+    <link rel="apple-touch-icon" sizes="114x114" href="@Href(Html.ThemePath(WorkContext.CurrentTheme, "/Content/ico/apple-touch-icon-114.png"))">
+    <link rel="apple-touch-icon" sizes="144x144" href="@Href(Html.ThemePath(WorkContext.CurrentTheme, "/Content/ico/apple-touch-icon-144.png"))">
+    <title>@Html.Title(title, siteName)</title>
+    @Display(Model.Head)
+    <script>(function (d) { d.className = "dyn " + d.className.substring(6, d.className.length); })(document.documentElement);</script>
+
+    <style type="text/css">
+		/*Custom Layout CSS START*/
+		@@media only screen and (min-width: 960px) 
+		{ 
+			.header-one #site-header, 
+			.header-one #site-navigation-wrap, 
+			.navbar-style-one .dropdown-menu > li > a, 
+			.nav-custom-height.navbar-style-one .dropdown-menu .wcmenucart-toggle-dropdown, 
+			.theme-minimal-graphical .nav-custom-height.navbar-style-one .dropdown-menu .wcmenucart-toggle-dropdown, 
+			.theme-minimal-graphical .nav-custom-height.navbar-style-one .dropdown-menu .search-toggle-li 
+			{ 
+				height: 40px; 
+			}
+
+			.navbar-style-one .dropdown-menu > li > a 
+			{ 
+				height: 40px; 
+			} 
+            .navbar-style-one .dropdown-menu > li > a:hover
+			{ 
+				background-color:#fff
+			} 
+		}/*Custom Layout CSS END*/
+		
+		body, .button, input { font-family: Raleway; }
+
+		/*Styling CSS START*/
+		.footer-callout-button { border-radius:3px; }
+		.is-sticky #site-header { opacity:0.83; }
+		/*Styling CSS END*/
+		
+		/*Admin Custom CSS START*/                
+		.thumbnail-entry-style .blog-entry-readmore { display: none; }
+		.page-id-2435 .wcmenucart-toggle-dropdown { display: none !important; }           
+		/*Admin Custom CSS END*/
+	</style>
+
+</head>
+<body class="single single-product postid-899 woocommerce woocommerce-page wpex-theme wpex-responsive theme-base full-width-main-layout sidebar-widget-icons wpb-js-composer js-comp-ver-4.1.2 vc_responsive" style="">
+	@Display(Model.Body)
+    @Display(Model.Tail)
+</body>
+</html>

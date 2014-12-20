@@ -1,0 +1,12 @@
+﻿<Placement>
+  <Place Parts_CarouselPart_Edit="Content:1" />
+  <Place Parts_CarouselPart="Content:0" />
+  <Place Parts_CalendarPart="Content:1" />
+  <Place Parts_ProductChart="Content:2" />
+  <Place Parts_SearchInput="Content:3" />
+  <Place Parts_ProductChartPart="Content:0" />  
+  <Place Parts_SearchResult="Content:5" />
+  <Place Parts_VendorAd="Content:7" />
+  <Place Parts_Product="Content:6" />
+  <Place Fields_MediaPicker_Edit="-"/>
+</Placement>

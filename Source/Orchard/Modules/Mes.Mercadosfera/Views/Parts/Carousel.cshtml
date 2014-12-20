@@ -1,0 +1,109 @@
+﻿@using System.Web.Mvc.Html
+
+@{
+    Style.Require("Carousel").AtHead();    
+}
+
+<style>
+    .media-library-picker-field {
+        display: none;
+    }
+
+    .enumeration-field {
+        display: none;
+    }
+</style>
+<div class="cContainer">
+
+    <div id="carousel-example-generic" class="carousel slide" data-ride="carousel">
+
+
+        <!-- Wrapper for slides -->
+        <div class="carousel-inner">
+        </div>
+
+        <!-- Controls -->
+
+        @*<a class="left carousel-control" href="#carousel-example-generic" data-slide="prev">
+    <span class="glyphicon glyphicon-chevron-left"></span>
+  </a>
+  <a class="right carousel-control" href="#carousel-example-generic" data-slide="next">
+    <span class="glyphicon glyphicon-chevron-right"></span>
+  </a>*@
+        <div class="carruselNavButton">
+            <a class="ls-nav-prev" href="#carousel-example-generic" data-slide="prev" style="display: block; visibility: visible;" data-slide="next"></a>
+        </div>
+        <div class="carruselNavButton">
+            <a class="ls-nav-next" href="#carousel-example-generic" data-slide="next" style="display: block; visibility: visible;" data-slide="next"></a>
+        </div>
+    </div>
+
+
+</div>
+
+
+@{ 
+    Script.Include("Mes.Vars.js");
+}
+
+<script>
+
+    window.Aspect = "";
+    function createCarouselHome(pDatos) {
+        var htmlC = "";
+        for (var i = 0; i < pDatos.length; i++) {
+            var act = "";
+            if (i == 0) act = "active";
+            var srcImage = pDatos[i].url;
+
+            window.Aspect = "R";
+            if ($(document).width() < 950) {
+                srcImage = pDatos[i].url.replace('.', '_m.');
+                window.Aspect = "M";
+            }
+            htmlC += "<div class=\"item " + act + "\"><img class=\"itemImg\" src=\"" + srcImage + "\" onload=\"\" alt=\"...\"><div class=\"carousel-caption " + pDatos[i].Clase + " \">" + pDatos[i].Descripcion + "</div></div>"
+            //OnImageLoad(event);
+        }
+
+        htmlC += "";
+
+        $(".carousel-inner").html(htmlC);
+    }
+
+    $(document).ready(function () {
+
+        var d = JSON.parse($('<div/>').html("@Model.Datos").text());
+        createCarouselHome(d);
+
+        $(window).resize(function () {
+
+            if ($(document).width() < 950) {
+                if (window.Aspect != "M") {
+                    $(".itemImg").each(function () {
+
+                        $(this).attr("src", $(this).attr("src").replace('.', '_m.'));
+                        window.Aspect = "M";
+                    });
+                }
+            }
+            else {
+                if (window.Aspect != "R") {
+                    $(".itemImg").each(function () {
+                        $(this).attr("src", $(this).attr("src").replace('_m', ''));
+                        window.Aspect = "R";
+                    });
+                }
+            }
+        });
+    });
+
+        //
+        //
+        //
+        function goSearchPage() {
+            document.location = window.urlBalse + '/ProductSearch?c=2';
+        }
+
+
+</script>
+

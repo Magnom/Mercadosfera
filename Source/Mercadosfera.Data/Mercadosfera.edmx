@@ -1,0 +1,1261 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+    <Schema Namespace="MesModel.Store" Alias="Self" Provider="System.Data.SqlClient" ProviderManifestToken="2008" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityContainer Name="MesModelStoreContainer">
+          <EntitySet Name="CATEGORIAS_TIPOSPRODUCTO" EntityType="MesModel.Store.CATEGORIAS_TIPOSPRODUCTO" store:Type="Tables" Schema="dbo" />
+          <EntitySet Name="CERTIFICADOS" EntityType="MesModel.Store.CERTIFICADOS" store:Type="Tables" Schema="dbo" />
+          <EntitySet Name="COMUNIDADES" EntityType="MesModel.Store.COMUNIDADES" store:Type="Tables" Schema="dbo" />
+          <EntitySet Name="DES_TIPOTEXTO" EntityType="MesModel.Store.DES_TIPOTEXTO" store:Type="Tables" Schema="dbo" />
+          <EntitySet Name="FORMATOS" EntityType="MesModel.Store.FORMATOS" store:Type="Tables" Schema="dbo" />
+          <EntitySet Name="IMAGENES_PRODUCTOS" EntityType="MesModel.Store.IMAGENES_PRODUCTOS" store:Type="Tables" Schema="dbo" />
+          <EntitySet Name="LOCALIDADES" EntityType="MesModel.Store.LOCALIDADES" store:Type="Tables" Schema="dbo" />
+          <EntitySet Name="PAISES" EntityType="MesModel.Store.PAISES" store:Type="Tables" Schema="dbo" />
+          <EntitySet Name="PRODUCTOS" EntityType="MesModel.Store.PRODUCTOS" store:Type="Tables" Schema="dbo" />
+          <EntitySet Name="sysdiagrams" EntityType="MesModel.Store.sysdiagrams" store:Type="Tables" Schema="dbo" />
+          <EntitySet Name="TIENDAS" EntityType="MesModel.Store.TIENDAS" store:Type="Tables" Schema="dbo" />
+          <EntitySet Name="TIENDAS_TEXTOS" EntityType="MesModel.Store.TIENDAS_TEXTOS" store:Type="Tables" Schema="dbo" />
+          <EntitySet Name="TIPOCERTIFICADO" EntityType="MesModel.Store.TIPOCERTIFICADO" store:Type="Tables" Schema="dbo" />
+          <EntitySet Name="TIPOPRODUCTO" EntityType="MesModel.Store.TIPOPRODUCTO" store:Type="Tables" Schema="dbo" />
+          <EntitySet Name="VENDEDORES" EntityType="MesModel.Store.VENDEDORES" store:Type="Tables" Schema="dbo" />
+          <AssociationSet Name="FK_CERTIFICADOS_TIPOCERTIFICADO" Association="MesModel.Store.FK_CERTIFICADOS_TIPOCERTIFICADO">
+            <End Role="TIPOCERTIFICADO" EntitySet="TIPOCERTIFICADO" />
+            <End Role="CERTIFICADOS" EntitySet="CERTIFICADOS" />
+          </AssociationSet>
+          <AssociationSet Name="FK_COMUNIDADES_PAISES" Association="MesModel.Store.FK_COMUNIDADES_PAISES">
+            <End Role="PAISES" EntitySet="PAISES" />
+            <End Role="COMUNIDADES" EntitySet="COMUNIDADES" />
+          </AssociationSet>
+          <AssociationSet Name="FK_LOCALIDADES_COMUNIDADES" Association="MesModel.Store.FK_LOCALIDADES_COMUNIDADES">
+            <End Role="COMUNIDADES" EntitySet="COMUNIDADES" />
+            <End Role="LOCALIDADES" EntitySet="LOCALIDADES" />
+          </AssociationSet>
+          <AssociationSet Name="FK_PRODUCTOS_CERTIFICADOS" Association="MesModel.Store.FK_PRODUCTOS_CERTIFICADOS">
+            <End Role="CERTIFICADOS" EntitySet="CERTIFICADOS" />
+            <End Role="PRODUCTOS" EntitySet="PRODUCTOS" />
+          </AssociationSet>
+          <AssociationSet Name="FK_PRODUCTOS_FORMATOS" Association="MesModel.Store.FK_PRODUCTOS_FORMATOS">
+            <End Role="FORMATOS" EntitySet="FORMATOS" />
+            <End Role="PRODUCTOS" EntitySet="PRODUCTOS" />
+          </AssociationSet>
+          <AssociationSet Name="FK_PRODUCTOS_TIPOPRODUCTO" Association="MesModel.Store.FK_PRODUCTOS_TIPOPRODUCTO">
+            <End Role="TIPOPRODUCTO" EntitySet="TIPOPRODUCTO" />
+            <End Role="PRODUCTOS" EntitySet="PRODUCTOS" />
+          </AssociationSet>
+          <AssociationSet Name="FK_VENDEDOR_TEXTOS_DES_TIPOTEXTO" Association="MesModel.Store.FK_VENDEDOR_TEXTOS_DES_TIPOTEXTO">
+            <End Role="DES_TIPOTEXTO" EntitySet="DES_TIPOTEXTO" />
+            <End Role="TIENDAS_TEXTOS" EntitySet="TIENDAS_TEXTOS" />
+          </AssociationSet>
+          <AssociationSet Name="FK_VENDEDOR_TEXTOS_VENDEDORES" Association="MesModel.Store.FK_VENDEDOR_TEXTOS_VENDEDORES">
+            <End Role="TIENDAS" EntitySet="TIENDAS" />
+            <End Role="TIENDAS_TEXTOS" EntitySet="TIENDAS_TEXTOS" />
+          </AssociationSet>
+          <AssociationSet Name="FK_VENDEDORES_LOCALIDADES" Association="MesModel.Store.FK_VENDEDORES_LOCALIDADES">
+            <End Role="LOCALIDADES" EntitySet="LOCALIDADES" />
+            <End Role="TIENDAS" EntitySet="TIENDAS" />
+          </AssociationSet>
+        </EntityContainer>
+        <EntityType Name="CATEGORIAS_TIPOSPRODUCTO">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" Nullable="false" />
+          <Property Name="Descripcion" Type="varchar" MaxLength="500" />
+        </EntityType>
+        <EntityType Name="CERTIFICADOS">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+          <Property Name="IdTipoCertificado" Type="int" />
+          <Property Name="Descripcion" Type="varchar" MaxLength="1000" />
+          <Property Name="Create_id" Type="varchar" MaxLength="32" />
+          <Property Name="Create_dt" Type="datetime" />
+          <Property Name="Update_Id" Type="varchar" MaxLength="32" />
+          <Property Name="Update_dt" Type="datetime" />
+          <Property Name="Delete_id" Type="varchar" MaxLength="32" />
+          <Property Name="Delete_dt" Type="datetime" />
+        </EntityType>
+        <EntityType Name="COMUNIDADES">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+          <Property Name="IdPais" Type="int" />
+          <Property Name="Descripcion" Type="varchar" MaxLength="2000" />
+          <Property Name="Create_id" Type="varchar" MaxLength="32" />
+          <Property Name="Create_dt" Type="datetime" />
+          <Property Name="Update_id" Type="varchar" MaxLength="32" />
+          <Property Name="Update_dt" Type="datetime" />
+          <Property Name="Delete_id" Type="varchar" MaxLength="32" />
+          <Property Name="Delete_dt" Type="datetime" />
+          <Property Name="Url" Type="varchar" MaxLength="1000" />
+        </EntityType>
+        <EntityType Name="DES_TIPOTEXTO">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+          <Property Name="Descripcon" Type="varchar" MaxLength="200" />
+          <Property Name="Create_id" Type="varchar" MaxLength="32" />
+          <Property Name="Create_dt" Type="datetime" />
+          <Property Name="Update_Id" Type="varchar" MaxLength="32" />
+          <Property Name="Update_dt" Type="datetime" />
+          <Property Name="Delete_id" Type="varchar" MaxLength="32" />
+          <Property Name="Delete_dt" Type="datetime" />
+        </EntityType>
+        <EntityType Name="FORMATOS">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+          <Property Name="Descripcion" Type="varchar" MaxLength="1000" />
+          <Property Name="Create_id" Type="varchar" MaxLength="32" />
+          <Property Name="Create_dt" Type="datetime" />
+          <Property Name="Update_Id" Type="varchar" MaxLength="32" />
+          <Property Name="Update_dt" Type="datetime" />
+          <Property Name="Delete_id" Type="varchar" MaxLength="32" />
+          <Property Name="Delete_dt" Type="datetime" />
+        </EntityType>
+        <EntityType Name="IMAGENES_PRODUCTOS">
+          <Key>
+            <PropertyRef Name="Id" />
+            <PropertyRef Name="IdProducto" />
+          </Key>
+          <Property Name="Id" Type="int" Nullable="false" />
+          <Property Name="IdProducto" Type="int" Nullable="false" />
+          <Property Name="Url" Type="varchar" MaxLength="200" />
+        </EntityType>
+        <EntityType Name="LOCALIDADES">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+          <Property Name="IdComunidad" Type="int" />
+          <Property Name="Descripcion" Type="nchar" MaxLength="10" />
+          <Property Name="Create_id" Type="nchar" MaxLength="10" />
+          <Property Name="Create_dt" Type="nchar" MaxLength="10" />
+          <Property Name="Update_id" Type="nchar" MaxLength="10" />
+          <Property Name="Update_dt" Type="nchar" MaxLength="10" />
+          <Property Name="Delete_id" Type="nchar" MaxLength="10" />
+          <Property Name="Delete_dt" Type="nchar" MaxLength="10" />
+          <Property Name="UrlOrchard" Type="varchar" MaxLength="1000" />
+        </EntityType>
+        <EntityType Name="PAISES">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+          <Property Name="Decripcion" Type="varchar" MaxLength="1000" />
+          <Property Name="Create_id" Type="varchar" MaxLength="32" />
+          <Property Name="Create_dt" Type="datetime" />
+          <Property Name="Update_id" Type="varchar" MaxLength="32" />
+          <Property Name="Update_dt" Type="datetime" />
+          <Property Name="Delete_id" Type="varchar" MaxLength="32" />
+          <Property Name="Delete_dt" Type="datetime" />
+          <Property Name="Codigo" Type="varchar" MaxLength="32" />
+        </EntityType>
+        <EntityType Name="PRODUCTOS">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" Nullable="false" />
+          <Property Name="IdTienda" Type="int" />
+          <Property Name="IdTipoProducto" Type="int" />
+          <Property Name="Peso" Type="int" />
+          <Property Name="IdFormato" Type="int" />
+          <Property Name="UnidadesPaquete" Type="int" />
+          <Property Name="Caducidad" Type="varchar" MaxLength="32" />
+          <Property Name="Conservacion" Type="varchar" MaxLength="32" />
+          <Property Name="IdCertificadoCalidad" Type="int" />
+          <Property Name="DimensionesPaquete" Type="varchar" MaxLength="32" />
+          <Property Name="Precio" Type="decimal" Scale="2" />
+          <Property Name="Moneda" Type="varchar" MaxLength="32" />
+          <Property Name="Create_id" Type="varchar" MaxLength="32" />
+          <Property Name="Create_dt" Type="datetime" />
+          <Property Name="Update_Id" Type="varchar" MaxLength="32" />
+          <Property Name="Update_dt" Type="datetime" />
+          <Property Name="Delete_id" Type="varchar" MaxLength="32" />
+          <Property Name="Delete_dt" Type="datetime" />
+          <Property Name="Descripcion" Type="varchar" MaxLength="3000" />
+          <Property Name="DescripcionCorta" Type="varchar" MaxLength="1000" />
+          <Property Name="Titulo" Type="varchar" MaxLength="200" />
+          <Property Name="UrlProducto" Type="varchar" MaxLength="500" />
+        </EntityType>
+        <EntityType Name="sysdiagrams">
+          <Key>
+            <PropertyRef Name="diagram_id" />
+          </Key>
+          <Property Name="name" Type="nvarchar" Nullable="false" MaxLength="128" />
+          <Property Name="principal_id" Type="int" Nullable="false" />
+          <Property Name="diagram_id" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+          <Property Name="version" Type="int" />
+          <Property Name="definition" Type="varbinary(max)" />
+        </EntityType>
+        <EntityType Name="TIENDAS">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" Nullable="false" />
+          <Property Name="UsuarioOrchard" Type="int" />
+          <Property Name="Nombre" Type="varchar" MaxLength="32" />
+          <Property Name="Descripcion" Type="varchar" MaxLength="100" />
+          <Property Name="Direccion" Type="varchar" MaxLength="64" />
+          <Property Name="DNI" Type="varchar" MaxLength="9" />
+          <Property Name="Mail" Type="varchar" MaxLength="32" />
+          <Property Name="Create_id" Type="varchar" MaxLength="32" />
+          <Property Name="Create_dt" Type="datetime" />
+          <Property Name="Update_Id" Type="varchar" MaxLength="32" />
+          <Property Name="Update_dt" Type="datetime" />
+          <Property Name="Delete_id" Type="varchar" MaxLength="32" />
+          <Property Name="Delete_dt" Type="datetime" />
+          <Property Name="Telefono" Type="varchar" MaxLength="9" />
+          <Property Name="Web" Type="varchar" MaxLength="100" />
+          <Property Name="Facebook" Type="varchar" MaxLength="100" />
+          <Property Name="IdGaleriaImagenes" Type="int" />
+          <Property Name="CoordenadasMaps" Type="varchar" MaxLength="500" />
+          <Property Name="IdComunidad" Type="int" />
+          <Property Name="IdLocalidad" Type="int" />
+          <Property Name="UrlOrchard" Type="varchar" MaxLength="1000" />
+        </EntityType>
+        <EntityType Name="TIENDAS_TEXTOS">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+          <Property Name="IdVendedor" Type="int" />
+          <Property Name="IdTipoTexto" Type="int" />
+          <Property Name="Descripcion" Type="varchar" MaxLength="4000" />
+          <Property Name="Create_id" Type="varchar" MaxLength="32" />
+          <Property Name="Create_dt" Type="datetime" />
+          <Property Name="Update_Id" Type="varchar" MaxLength="32" />
+          <Property Name="Update_dt" Type="datetime" />
+          <Property Name="Delete_id" Type="varchar" MaxLength="32" />
+          <Property Name="Delete_dt" Type="datetime" />
+        </EntityType>
+        <EntityType Name="TIPOCERTIFICADO">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+          <Property Name="Descripcion" Type="varchar" MaxLength="1000" />
+          <Property Name="Create_id" Type="varchar" MaxLength="32" />
+          <Property Name="Create_dt" Type="datetime" />
+          <Property Name="Update_Id" Type="varchar" MaxLength="32" />
+          <Property Name="Update_dt" Type="datetime" />
+          <Property Name="Delete_id" Type="varchar" MaxLength="32" />
+          <Property Name="Delete_dt" Type="datetime" />
+        </EntityType>
+        <EntityType Name="TIPOPRODUCTO">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+          <Property Name="IdCategoria" Type="int" />
+          <Property Name="Descripcion" Type="varchar" MaxLength="1000" />
+          <Property Name="Create_id" Type="varchar" MaxLength="32" />
+          <Property Name="Create_dt" Type="datetime" />
+          <Property Name="Update_Id" Type="varchar" MaxLength="32" />
+          <Property Name="Update_dt" Type="datetime" />
+          <Property Name="Delete_id" Type="varchar" MaxLength="32" />
+          <Property Name="Delete_dt" Type="datetime" />
+        </EntityType>
+        <EntityType Name="VENDEDORES">
+          <Key>
+            <PropertyRef Name="OrchardId" />
+          </Key>
+          <Property Name="OrchardId" Type="varchar" Nullable="false" MaxLength="200" />
+          <Property Name="Estado" Type="int" />
+          <Property Name="Nombre" Type="varchar" MaxLength="200" />
+          <Property Name="Direccion" Type="varchar" MaxLength="200" />
+          <Property Name="TipoCuenta" Type="int" Nullable="false" />
+        </EntityType>
+        <Association Name="FK_CERTIFICADOS_TIPOCERTIFICADO">
+          <End Role="TIPOCERTIFICADO" Type="MesModel.Store.TIPOCERTIFICADO" Multiplicity="0..1" />
+          <End Role="CERTIFICADOS" Type="MesModel.Store.CERTIFICADOS" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="TIPOCERTIFICADO">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="CERTIFICADOS">
+              <PropertyRef Name="IdTipoCertificado" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_COMUNIDADES_PAISES">
+          <End Role="PAISES" Type="MesModel.Store.PAISES" Multiplicity="0..1" />
+          <End Role="COMUNIDADES" Type="MesModel.Store.COMUNIDADES" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="PAISES">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="COMUNIDADES">
+              <PropertyRef Name="IdPais" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_LOCALIDADES_COMUNIDADES">
+          <End Role="COMUNIDADES" Type="MesModel.Store.COMUNIDADES" Multiplicity="0..1" />
+          <End Role="LOCALIDADES" Type="MesModel.Store.LOCALIDADES" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="COMUNIDADES">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="LOCALIDADES">
+              <PropertyRef Name="IdComunidad" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_PRODUCTOS_CERTIFICADOS">
+          <End Role="CERTIFICADOS" Type="MesModel.Store.CERTIFICADOS" Multiplicity="0..1" />
+          <End Role="PRODUCTOS" Type="MesModel.Store.PRODUCTOS" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="CERTIFICADOS">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="PRODUCTOS">
+              <PropertyRef Name="IdCertificadoCalidad" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_PRODUCTOS_FORMATOS">
+          <End Role="FORMATOS" Type="MesModel.Store.FORMATOS" Multiplicity="0..1" />
+          <End Role="PRODUCTOS" Type="MesModel.Store.PRODUCTOS" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="FORMATOS">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="PRODUCTOS">
+              <PropertyRef Name="IdFormato" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_PRODUCTOS_TIPOPRODUCTO">
+          <End Role="TIPOPRODUCTO" Type="MesModel.Store.TIPOPRODUCTO" Multiplicity="0..1" />
+          <End Role="PRODUCTOS" Type="MesModel.Store.PRODUCTOS" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="TIPOPRODUCTO">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="PRODUCTOS">
+              <PropertyRef Name="IdTipoProducto" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_VENDEDOR_TEXTOS_DES_TIPOTEXTO">
+          <End Role="DES_TIPOTEXTO" Type="MesModel.Store.DES_TIPOTEXTO" Multiplicity="0..1" />
+          <End Role="TIENDAS_TEXTOS" Type="MesModel.Store.TIENDAS_TEXTOS" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="DES_TIPOTEXTO">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="TIENDAS_TEXTOS">
+              <PropertyRef Name="IdTipoTexto" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_VENDEDOR_TEXTOS_VENDEDORES">
+          <End Role="TIENDAS" Type="MesModel.Store.TIENDAS" Multiplicity="0..1" />
+          <End Role="TIENDAS_TEXTOS" Type="MesModel.Store.TIENDAS_TEXTOS" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="TIENDAS">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="TIENDAS_TEXTOS">
+              <PropertyRef Name="IdVendedor" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_VENDEDORES_LOCALIDADES">
+          <End Role="LOCALIDADES" Type="MesModel.Store.LOCALIDADES" Multiplicity="0..1" />
+          <End Role="TIENDAS" Type="MesModel.Store.TIENDAS" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="LOCALIDADES">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="TIENDAS">
+              <PropertyRef Name="IdLocalidad" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Function Name="SPR_CATEGORIAS_TIPOSPRODUCTO" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="zona" Type="varchar" Mode="In" />
+          <Parameter Name="tienda" Type="varchar" Mode="In" />
+          <Parameter Name="minprice" Type="float" Mode="In" />
+          <Parameter Name="maxprice" Type="float" Mode="In" />
+        </Function>
+        <Function Name="SPR_Productos" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="desc" Type="varchar" Mode="In" />
+          <Parameter Name="category" Type="varchar" Mode="In" />
+          <Parameter Name="zone" Type="varchar" Mode="In" />
+          <Parameter Name="priceMin" Type="float" Mode="In" />
+          <Parameter Name="priceMax" Type="float" Mode="In" />
+          <Parameter Name="store" Type="varchar" Mode="In" />
+        </Function>
+        <Function Name="SPR_ProductosDetalle" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="IdProducto" Type="int" Mode="In" />
+        </Function>
+        <Function Name="SPR_ProductosImagenes" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="idProducto" Type="int" Mode="In" />
+        </Function>
+        <Function Name="SPR_Tienda" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="categoria" Type="varchar" Mode="In" />
+          <Parameter Name="zona" Type="varchar" Mode="In" />
+          <Parameter Name="minprice" Type="float" Mode="In" />
+          <Parameter Name="maxprice" Type="float" Mode="In" />
+        </Function>
+        <Function Name="SPR_TiendasDetalle" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="idTienda" Type="int" Mode="In" />
+        </Function>
+        <Function Name="SPR_Zonas" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="categoria" Type="varchar" Mode="In" />
+          <Parameter Name="tienda" Type="varchar" Mode="In" />
+          <Parameter Name="minprice" Type="float" Mode="In" />
+          <Parameter Name="maxprice" Type="float" Mode="In" />
+        </Function>
+      </Schema></edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="MesModel" Alias="Self" p1:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:p1="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityContainer Name="Entities" p1:LazyLoadingEnabled="true">
+          <EntitySet Name="CERTIFICADOS" EntityType="MesModel.CERTIFICADOS" />
+          <EntitySet Name="COMUNIDADES" EntityType="MesModel.COMUNIDADES" />
+          <EntitySet Name="DES_TIPOTEXTO" EntityType="MesModel.DES_TIPOTEXTO" />
+          <EntitySet Name="FORMATOS" EntityType="MesModel.FORMATOS" />
+          <EntitySet Name="IMAGENES_PRODUCTOS" EntityType="MesModel.IMAGENES_PRODUCTOS" />
+          <EntitySet Name="LOCALIDADES" EntityType="MesModel.LOCALIDADES" />
+          <EntitySet Name="PAISES" EntityType="MesModel.PAISES" />
+          <EntitySet Name="sysdiagrams" EntityType="MesModel.sysdiagrams" />
+          <EntitySet Name="TIPOCERTIFICADO" EntityType="MesModel.TIPOCERTIFICADO" />
+          <EntitySet Name="TIPOPRODUCTO" EntityType="MesModel.TIPOPRODUCTO" />
+          <AssociationSet Name="FK_CERTIFICADOS_TIPOCERTIFICADO" Association="MesModel.FK_CERTIFICADOS_TIPOCERTIFICADO">
+            <End Role="TIPOCERTIFICADO" EntitySet="TIPOCERTIFICADO" />
+            <End Role="CERTIFICADOS" EntitySet="CERTIFICADOS" />
+          </AssociationSet>
+          <AssociationSet Name="FK_COMUNIDADES_PAISES" Association="MesModel.FK_COMUNIDADES_PAISES">
+            <End Role="PAISES" EntitySet="PAISES" />
+            <End Role="COMUNIDADES" EntitySet="COMUNIDADES" />
+          </AssociationSet>
+          <AssociationSet Name="FK_LOCALIDADES_COMUNIDADES" Association="MesModel.FK_LOCALIDADES_COMUNIDADES">
+            <End Role="COMUNIDADES" EntitySet="COMUNIDADES" />
+            <End Role="LOCALIDADES" EntitySet="LOCALIDADES" />
+          </AssociationSet>
+          <FunctionImport Name="ProductSearch" ReturnType="Collection(MesModel.ProductSearch_Result)">
+            <Parameter Name="desc" Mode="In" Type="String" />
+            <Parameter Name="category" Mode="In" Type="String" />
+            <Parameter Name="zone" Mode="In" Type="String" />
+            <Parameter Name="priceMin" Mode="In" Type="Double" />
+            <Parameter Name="priceMax" Mode="In" Type="Double" />
+            <Parameter Name="store" Mode="In" Type="String" />
+          </FunctionImport>
+          <EntitySet Name="CATEGORIAS_TIPOSPRODUCTO" EntityType="MesModel.CATEGORIAS_TIPOSPRODUCTO" />
+          <EntitySet Name="PRODUCTOS" EntityType="MesModel.PRODUCTOS" />
+          <EntitySet Name="TIENDAS" EntityType="MesModel.TIENDAS" />
+          <EntitySet Name="TIENDAS_TEXTOS" EntityType="MesModel.TIENDAS_TEXTOS" />
+          <AssociationSet Name="FK_PRODUCTOS_CERTIFICADOS" Association="MesModel.FK_PRODUCTOS_CERTIFICADOS">
+            <End Role="CERTIFICADOS" EntitySet="CERTIFICADOS" />
+            <End Role="PRODUCTOS" EntitySet="PRODUCTOS" />
+          </AssociationSet>
+          <AssociationSet Name="FK_VENDEDOR_TEXTOS_DES_TIPOTEXTO" Association="MesModel.FK_VENDEDOR_TEXTOS_DES_TIPOTEXTO">
+            <End Role="DES_TIPOTEXTO" EntitySet="DES_TIPOTEXTO" />
+            <End Role="TIENDAS_TEXTOS" EntitySet="TIENDAS_TEXTOS" />
+          </AssociationSet>
+          <AssociationSet Name="FK_PRODUCTOS_FORMATOS" Association="MesModel.FK_PRODUCTOS_FORMATOS">
+            <End Role="FORMATOS" EntitySet="FORMATOS" />
+            <End Role="PRODUCTOS" EntitySet="PRODUCTOS" />
+          </AssociationSet>
+          <AssociationSet Name="FK_VENDEDORES_LOCALIDADES" Association="MesModel.FK_VENDEDORES_LOCALIDADES">
+            <End Role="LOCALIDADES" EntitySet="LOCALIDADES" />
+            <End Role="TIENDAS" EntitySet="TIENDAS" />
+          </AssociationSet>
+          <AssociationSet Name="FK_PRODUCTOS_TIPOPRODUCTO" Association="MesModel.FK_PRODUCTOS_TIPOPRODUCTO">
+            <End Role="TIPOPRODUCTO" EntitySet="TIPOPRODUCTO" />
+            <End Role="PRODUCTOS" EntitySet="PRODUCTOS" />
+          </AssociationSet>
+          <AssociationSet Name="FK_VENDEDOR_TEXTOS_VENDEDORES" Association="MesModel.FK_VENDEDOR_TEXTOS_VENDEDORES">
+            <End Role="TIENDAS" EntitySet="TIENDAS" />
+            <End Role="TIENDAS_TEXTOS" EntitySet="TIENDAS_TEXTOS" />
+          </AssociationSet>
+          <FunctionImport Name="CategorySearch" ReturnType="Collection(MesModel.SelecValue)">
+            <Parameter Name="zona" Mode="In" Type="String" />
+            <Parameter Name="tienda" Mode="In" Type="String" />
+            <Parameter Name="minprice" Mode="In" Type="Double" />
+            <Parameter Name="maxprice" Mode="In" Type="Double" />
+          </FunctionImport>
+          <FunctionImport Name="StoreSearch" ReturnType="Collection(MesModel.SelecValue)">
+            <Parameter Name="categoria" Mode="In" Type="String" />
+            <Parameter Name="zona" Mode="In" Type="String" />
+            <Parameter Name="minprice" Mode="In" Type="Double" />
+            <Parameter Name="maxprice" Mode="In" Type="Double" />
+          </FunctionImport>
+          <FunctionImport Name="ZoneSearch" ReturnType="Collection(MesModel.SelecValue)">
+            <Parameter Name="categoria" Mode="In" Type="String" />
+            <Parameter Name="tienda" Mode="In" Type="String" />
+            <Parameter Name="minprice" Mode="In" Type="Double" />
+            <Parameter Name="maxprice" Mode="In" Type="Double" />
+          </FunctionImport>
+          <FunctionImport Name="GetProductosDetalle" ReturnType="Collection(MesModel.ProductoDetalle)">
+          <Parameter Name="IdProducto" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="GetStore" ReturnType="Collection(MesModel.GetStore_Result)">
+          <Parameter Name="idTienda" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="GetProductosImagenes" ReturnType="Collection(MesModel.GetProductosImagenes_Result)">
+          <Parameter Name="idProducto" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <EntitySet Name="VENDEDORES" EntityType="MesModel.VENDEDORES" />
+        </EntityContainer>
+        <EntityType Name="CERTIFICADOS">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Type="Int32" Name="ID" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Type="Int32" Name="IdTipoCertificado" />
+          <Property Type="String" Name="Descripcion" MaxLength="1000" FixedLength="false" Unicode="false" />
+          <Property Type="String" Name="Create_id" MaxLength="32" FixedLength="false" Unicode="false" />
+          <Property Type="DateTime" Name="Create_dt" Precision="3" />
+          <Property Type="String" Name="Update_Id" MaxLength="32" FixedLength="false" Unicode="false" />
+          <Property Type="DateTime" Name="Update_dt" Precision="3" />
+          <Property Type="String" Name="Delete_id" MaxLength="32" FixedLength="false" Unicode="false" />
+          <Property Type="DateTime" Name="Delete_dt" Precision="3" />
+          <NavigationProperty Name="TIPOCERTIFICADO" Relationship="MesModel.FK_CERTIFICADOS_TIPOCERTIFICADO" FromRole="CERTIFICADOS" ToRole="TIPOCERTIFICADO" />
+          <NavigationProperty Name="PRODUCTOS" Relationship="MesModel.FK_PRODUCTOS_CERTIFICADOS" FromRole="CERTIFICADOS" ToRole="PRODUCTOS" />
+        </EntityType>
+        <EntityType Name="COMUNIDADES">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Type="Int32" Name="ID" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Type="Int32" Name="IdPais" />
+          <Property Type="String" Name="Descripcion" MaxLength="2000" FixedLength="false" Unicode="false" />
+          <Property Type="String" Name="Create_id" MaxLength="32" FixedLength="false" Unicode="false" />
+          <Property Type="DateTime" Name="Create_dt" Precision="3" />
+          <Property Type="String" Name="Update_id" MaxLength="32" FixedLength="false" Unicode="false" />
+          <Property Type="DateTime" Name="Update_dt" Precision="3" />
+          <Property Type="String" Name="Delete_id" MaxLength="32" FixedLength="false" Unicode="false" />
+          <Property Type="DateTime" Name="Delete_dt" Precision="3" />
+          <Property Type="String" Name="Url" MaxLength="1000" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="PAISES" Relationship="MesModel.FK_COMUNIDADES_PAISES" FromRole="COMUNIDADES" ToRole="PAISES" />
+          <NavigationProperty Name="LOCALIDADES" Relationship="MesModel.FK_LOCALIDADES_COMUNIDADES" FromRole="COMUNIDADES" ToRole="LOCALIDADES" />
+        </EntityType>
+        <EntityType Name="DES_TIPOTEXTO">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Type="Int32" Name="ID" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Type="String" Name="Descripcon" MaxLength="200" FixedLength="false" Unicode="false" />
+          <Property Type="String" Name="Create_id" MaxLength="32" FixedLength="false" Unicode="false" />
+          <Property Type="DateTime" Name="Create_dt" Precision="3" />
+          <Property Type="String" Name="Update_Id" MaxLength="32" FixedLength="false" Unicode="false" />
+          <Property Type="DateTime" Name="Update_dt" Precision="3" />
+          <Property Type="String" Name="Delete_id" MaxLength="32" FixedLength="false" Unicode="false" />
+          <Property Type="DateTime" Name="Delete_dt" Precision="3" />
+          <NavigationProperty Name="TIENDAS_TEXTOS" Relationship="MesModel.FK_VENDEDOR_TEXTOS_DES_TIPOTEXTO" FromRole="DES_TIPOTEXTO" ToRole="TIENDAS_TEXTOS" />
+        </EntityType>
+        <EntityType Name="FORMATOS">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Type="Int32" Name="ID" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Type="String" Name="Descripcion" MaxLength="1000" FixedLength="false" Unicode="false" />
+          <Property Type="String" Name="Create_id" MaxLength="32" FixedLength="false" Unicode="false" />
+          <Property Type="DateTime" Name="Create_dt" Precision="3" />
+          <Property Type="String" Name="Update_Id" MaxLength="32" FixedLength="false" Unicode="false" />
+          <Property Type="DateTime" Name="Update_dt" Precision="3" />
+          <Property Type="String" Name="Delete_id" MaxLength="32" FixedLength="false" Unicode="false" />
+          <Property Type="DateTime" Name="Delete_dt" Precision="3" />
+          <NavigationProperty Name="PRODUCTOS" Relationship="MesModel.FK_PRODUCTOS_FORMATOS" FromRole="FORMATOS" ToRole="PRODUCTOS" />
+        </EntityType>
+        <EntityType Name="IMAGENES_PRODUCTOS">
+          <Key>
+            <PropertyRef Name="Id" />
+            <PropertyRef Name="IdProducto" />
+          </Key>
+          <Property Type="Int32" Name="Id" Nullable="false" />
+          <Property Type="Int32" Name="IdProducto" Nullable="false" />
+          <Property Type="String" Name="Url" MaxLength="200" FixedLength="false" Unicode="false" />
+        </EntityType>
+        <EntityType Name="LOCALIDADES">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Type="Int32" Name="ID" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Type="Int32" Name="IdComunidad" />
+          <Property Type="String" Name="Descripcion" MaxLength="10" FixedLength="true" Unicode="true" />
+          <Property Type="String" Name="Create_id" MaxLength="10" FixedLength="true" Unicode="true" />
+          <Property Type="String" Name="Create_dt" MaxLength="10" FixedLength="true" Unicode="true" />
+          <Property Type="String" Name="Update_id" MaxLength="10" FixedLength="true" Unicode="true" />
+          <Property Type="String" Name="Update_dt" MaxLength="10" FixedLength="true" Unicode="true" />
+          <Property Type="String" Name="Delete_id" MaxLength="10" FixedLength="true" Unicode="true" />
+          <Property Type="String" Name="Delete_dt" MaxLength="10" FixedLength="true" Unicode="true" />
+          <Property Type="String" Name="UrlOrchard" MaxLength="1000" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="COMUNIDADES" Relationship="MesModel.FK_LOCALIDADES_COMUNIDADES" FromRole="LOCALIDADES" ToRole="COMUNIDADES" />
+          <NavigationProperty Name="TIENDAS" Relationship="MesModel.FK_VENDEDORES_LOCALIDADES" FromRole="LOCALIDADES" ToRole="TIENDAS" />
+        </EntityType>
+        <EntityType Name="PAISES">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Type="Int32" Name="ID" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Type="String" Name="Decripcion" MaxLength="1000" FixedLength="false" Unicode="false" />
+          <Property Type="String" Name="Create_id" MaxLength="32" FixedLength="false" Unicode="false" />
+          <Property Type="DateTime" Name="Create_dt" Precision="3" />
+          <Property Type="String" Name="Update_id" MaxLength="32" FixedLength="false" Unicode="false" />
+          <Property Type="DateTime" Name="Update_dt" Precision="3" />
+          <Property Type="String" Name="Delete_id" MaxLength="32" FixedLength="false" Unicode="false" />
+          <Property Type="DateTime" Name="Delete_dt" Precision="3" />
+          <Property Type="String" Name="Codigo" MaxLength="32" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="COMUNIDADES" Relationship="MesModel.FK_COMUNIDADES_PAISES" FromRole="PAISES" ToRole="COMUNIDADES" />
+        </EntityType>
+        <EntityType Name="sysdiagrams">
+          <Key>
+            <PropertyRef Name="diagram_id" />
+          </Key>
+          <Property Type="String" Name="name" Nullable="false" MaxLength="128" FixedLength="false" Unicode="true" />
+          <Property Type="Int32" Name="principal_id" Nullable="false" />
+          <Property Type="Int32" Name="diagram_id" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Type="Int32" Name="version" />
+          <Property Type="Binary" Name="definition" MaxLength="Max" FixedLength="false" />
+        </EntityType>
+        <EntityType Name="TIPOCERTIFICADO">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Type="Int32" Name="ID" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Type="String" Name="Descripcion" MaxLength="1000" FixedLength="false" Unicode="false" />
+          <Property Type="String" Name="Create_id" MaxLength="32" FixedLength="false" Unicode="false" />
+          <Property Type="DateTime" Name="Create_dt" Precision="3" />
+          <Property Type="String" Name="Update_Id" MaxLength="32" FixedLength="false" Unicode="false" />
+          <Property Type="DateTime" Name="Update_dt" Precision="3" />
+          <Property Type="String" Name="Delete_id" MaxLength="32" FixedLength="false" Unicode="false" />
+          <Property Type="DateTime" Name="Delete_dt" Precision="3" />
+          <NavigationProperty Name="CERTIFICADOS" Relationship="MesModel.FK_CERTIFICADOS_TIPOCERTIFICADO" FromRole="TIPOCERTIFICADO" ToRole="CERTIFICADOS" />
+        </EntityType>
+        <EntityType Name="TIPOPRODUCTO">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Type="Int32" Name="ID" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Type="String" Name="Descripcion" MaxLength="1000" FixedLength="false" Unicode="false" />
+          <Property Type="String" Name="Create_id" MaxLength="32" FixedLength="false" Unicode="false" />
+          <Property Type="DateTime" Name="Create_dt" Precision="3" />
+          <Property Type="String" Name="Update_Id" MaxLength="32" FixedLength="false" Unicode="false" />
+          <Property Type="DateTime" Name="Update_dt" Precision="3" />
+          <Property Type="String" Name="Delete_id" MaxLength="32" FixedLength="false" Unicode="false" />
+          <Property Type="DateTime" Name="Delete_dt" Precision="3" />
+          <Property Type="Int32" Name="IdCategoria" />
+          <NavigationProperty Name="PRODUCTOS" Relationship="MesModel.FK_PRODUCTOS_TIPOPRODUCTO" FromRole="TIPOPRODUCTO" ToRole="PRODUCTOS" />
+        </EntityType>
+        <Association Name="FK_CERTIFICADOS_TIPOCERTIFICADO">
+          <End Type="MesModel.TIPOCERTIFICADO" Role="TIPOCERTIFICADO" Multiplicity="0..1" />
+          <End Type="MesModel.CERTIFICADOS" Role="CERTIFICADOS" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="TIPOCERTIFICADO">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="CERTIFICADOS">
+              <PropertyRef Name="IdTipoCertificado" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_COMUNIDADES_PAISES">
+          <End Type="MesModel.PAISES" Role="PAISES" Multiplicity="0..1" />
+          <End Type="MesModel.COMUNIDADES" Role="COMUNIDADES" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="PAISES">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="COMUNIDADES">
+              <PropertyRef Name="IdPais" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_LOCALIDADES_COMUNIDADES">
+          <End Type="MesModel.COMUNIDADES" Role="COMUNIDADES" Multiplicity="0..1" />
+          <End Type="MesModel.LOCALIDADES" Role="LOCALIDADES" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="COMUNIDADES">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="LOCALIDADES">
+              <PropertyRef Name="IdComunidad" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <ComplexType Name="ProductSearch_Result">
+          <Property Type="String" Name="DescStore" Nullable="true" MaxLength="100" />
+          <Property Type="String" Name="DescProduct" Nullable="true" MaxLength="3000" />
+          <Property Type="String" Name="TitleProduct" Nullable="true" MaxLength="200" />
+          <Property Type="Decimal" Name="Rate" Nullable="false" Precision="2" Scale="1" />
+          <Property Type="String" Name="UrlStore" Nullable="false" MaxLength="4" />
+          <Property Type="String" Name="UrlProduct" Nullable="false" MaxLength="4" />
+          <Property Type="Decimal" Name="Price" Nullable="false" Precision="2" Scale="1" />
+          <Property Type="Decimal" Name="PriceBase" Nullable="false" Precision="2" Scale="1" />
+          <Property Type="String" Name="Money" Nullable="false" MaxLength="3" />
+          <Property Type="Int32" Name="idTienda" Nullable="true" />
+          <Property Type="String" Name="ProductPicture" Nullable="true" MaxLength="450" />
+        </ComplexType>
+        <EntityType Name="CATEGORIAS_TIPOSPRODUCTO">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Type="Int32" Name="Id" Nullable="false" />
+          <Property Type="String" Name="Descripcion" MaxLength="500" FixedLength="false" Unicode="false" />
+        </EntityType>
+        <EntityType Name="PRODUCTOS">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Type="Int32" Name="ID" Nullable="false" />
+          <Property Type="Int32" Name="IdTienda" />
+          <Property Type="Int32" Name="IdTipoProducto" />
+          <Property Type="Int32" Name="Peso" />
+          <Property Type="Int32" Name="IdFormato" />
+          <Property Type="Int32" Name="UnidadesPaquete" />
+          <Property Type="String" Name="Caducidad" MaxLength="32" FixedLength="false" Unicode="false" />
+          <Property Type="String" Name="Conservacion" MaxLength="32" FixedLength="false" Unicode="false" />
+          <Property Type="Int32" Name="IdCertificadoCalidad" />
+          <Property Type="String" Name="DimensionesPaquete" MaxLength="32" FixedLength="false" Unicode="false" />
+          <Property Type="Decimal" Name="Precio" Precision="18" Scale="2" />
+          <Property Type="String" Name="Moneda" MaxLength="32" FixedLength="false" Unicode="false" />
+          <Property Type="String" Name="Create_id" MaxLength="32" FixedLength="false" Unicode="false" />
+          <Property Type="DateTime" Name="Create_dt" Precision="3" />
+          <Property Type="String" Name="Update_Id" MaxLength="32" FixedLength="false" Unicode="false" />
+          <Property Type="DateTime" Name="Update_dt" Precision="3" />
+          <Property Type="String" Name="Delete_id" MaxLength="32" FixedLength="false" Unicode="false" />
+          <Property Type="DateTime" Name="Delete_dt" Precision="3" />
+          <Property Type="String" Name="Descripcion" MaxLength="3000" FixedLength="false" Unicode="false" />
+          <Property Type="String" Name="DescripcionCorta" MaxLength="1000" FixedLength="false" Unicode="false" />
+          <Property Type="String" Name="Titulo" MaxLength="200" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="CERTIFICADOS" Relationship="MesModel.FK_PRODUCTOS_CERTIFICADOS" FromRole="PRODUCTOS" ToRole="CERTIFICADOS" />
+          <NavigationProperty Name="FORMATOS" Relationship="MesModel.FK_PRODUCTOS_FORMATOS" FromRole="PRODUCTOS" ToRole="FORMATOS" />
+          <NavigationProperty Name="TIPOPRODUCTO" Relationship="MesModel.FK_PRODUCTOS_TIPOPRODUCTO" FromRole="PRODUCTOS" ToRole="TIPOPRODUCTO" />
+          <Property Type="String" Name="UrlProducto" MaxLength="500" FixedLength="false" Unicode="false" />
+        </EntityType>
+        <EntityType Name="TIENDAS">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Type="Int32" Name="Id" Nullable="false" />
+          <Property Type="Int32" Name="UsuarioOrchard" />
+          <Property Type="String" Name="Nombre" MaxLength="32" FixedLength="false" Unicode="false" />
+          <Property Type="String" Name="Descripcion" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Type="String" Name="Direccion" MaxLength="64" FixedLength="false" Unicode="false" />
+          <Property Type="String" Name="DNI" MaxLength="9" FixedLength="false" Unicode="false" />
+          <Property Type="String" Name="Mail" MaxLength="32" FixedLength="false" Unicode="false" />
+          <Property Type="String" Name="Create_id" MaxLength="32" FixedLength="false" Unicode="false" />
+          <Property Type="DateTime" Name="Create_dt" Precision="3" />
+          <Property Type="String" Name="Update_Id" MaxLength="32" FixedLength="false" Unicode="false" />
+          <Property Type="DateTime" Name="Update_dt" Precision="3" />
+          <Property Type="String" Name="Delete_id" MaxLength="32" FixedLength="false" Unicode="false" />
+          <Property Type="DateTime" Name="Delete_dt" Precision="3" />
+          <Property Type="String" Name="Telefono" MaxLength="9" FixedLength="false" Unicode="false" />
+          <Property Type="String" Name="Web" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Type="String" Name="Facebook" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Type="Int32" Name="IdGaleriaImagenes" />
+          <Property Type="String" Name="CoordenadasMaps" MaxLength="500" FixedLength="false" Unicode="false" />
+          <Property Type="Int32" Name="IdComunidad" />
+          <Property Type="Int32" Name="IdLocalidad" />
+          <Property Type="String" Name="UrlOrchard" MaxLength="1000" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="LOCALIDADES" Relationship="MesModel.FK_VENDEDORES_LOCALIDADES" FromRole="TIENDAS" ToRole="LOCALIDADES" />
+          <NavigationProperty Name="TIENDAS_TEXTOS" Relationship="MesModel.FK_VENDEDOR_TEXTOS_VENDEDORES" FromRole="TIENDAS" ToRole="TIENDAS_TEXTOS" />
+        </EntityType>
+        <EntityType Name="TIENDAS_TEXTOS">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Type="Int32" Name="ID" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Type="Int32" Name="IdVendedor" />
+          <Property Type="Int32" Name="IdTipoTexto" />
+          <Property Type="String" Name="Descripcion" MaxLength="4000" FixedLength="false" Unicode="false" />
+          <Property Type="String" Name="Create_id" MaxLength="32" FixedLength="false" Unicode="false" />
+          <Property Type="DateTime" Name="Create_dt" Precision="3" />
+          <Property Type="String" Name="Update_Id" MaxLength="32" FixedLength="false" Unicode="false" />
+          <Property Type="DateTime" Name="Update_dt" Precision="3" />
+          <Property Type="String" Name="Delete_id" MaxLength="32" FixedLength="false" Unicode="false" />
+          <Property Type="DateTime" Name="Delete_dt" Precision="3" />
+          <NavigationProperty Name="DES_TIPOTEXTO" Relationship="MesModel.FK_VENDEDOR_TEXTOS_DES_TIPOTEXTO" FromRole="TIENDAS_TEXTOS" ToRole="DES_TIPOTEXTO" />
+          <NavigationProperty Name="TIENDAS" Relationship="MesModel.FK_VENDEDOR_TEXTOS_VENDEDORES" FromRole="TIENDAS_TEXTOS" ToRole="TIENDAS" />
+        </EntityType>
+        <Association Name="FK_PRODUCTOS_CERTIFICADOS">
+          <End Type="MesModel.CERTIFICADOS" Role="CERTIFICADOS" Multiplicity="0..1" />
+          <End Type="MesModel.PRODUCTOS" Role="PRODUCTOS" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="CERTIFICADOS">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="PRODUCTOS">
+              <PropertyRef Name="IdCertificadoCalidad" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_VENDEDOR_TEXTOS_DES_TIPOTEXTO">
+          <End Type="MesModel.DES_TIPOTEXTO" Role="DES_TIPOTEXTO" Multiplicity="0..1" />
+          <End Type="MesModel.TIENDAS_TEXTOS" Role="TIENDAS_TEXTOS" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="DES_TIPOTEXTO">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="TIENDAS_TEXTOS">
+              <PropertyRef Name="IdTipoTexto" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_PRODUCTOS_FORMATOS">
+          <End Type="MesModel.FORMATOS" Role="FORMATOS" Multiplicity="0..1" />
+          <End Type="MesModel.PRODUCTOS" Role="PRODUCTOS" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="FORMATOS">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="PRODUCTOS">
+              <PropertyRef Name="IdFormato" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_VENDEDORES_LOCALIDADES">
+          <End Type="MesModel.LOCALIDADES" Role="LOCALIDADES" Multiplicity="0..1" />
+          <End Type="MesModel.TIENDAS" Role="TIENDAS" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="LOCALIDADES">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="TIENDAS">
+              <PropertyRef Name="IdLocalidad" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_PRODUCTOS_TIPOPRODUCTO">
+          <End Type="MesModel.TIPOPRODUCTO" Role="TIPOPRODUCTO" Multiplicity="0..1" />
+          <End Type="MesModel.PRODUCTOS" Role="PRODUCTOS" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="TIPOPRODUCTO">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="PRODUCTOS">
+              <PropertyRef Name="IdTipoProducto" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_VENDEDOR_TEXTOS_VENDEDORES">
+          <End Type="MesModel.TIENDAS" Role="TIENDAS" Multiplicity="0..1" />
+          <End Type="MesModel.TIENDAS_TEXTOS" Role="TIENDAS_TEXTOS" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="TIENDAS">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="TIENDAS_TEXTOS">
+              <PropertyRef Name="IdVendedor" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <ComplexType Name="SelecValue">
+          <Property Type="Int32" Name="Cantidad" Nullable="false" />
+          <Property Type="Int32" Name="idCategoria" Nullable="false" />
+          <Property Type="Int32" Name="idSubcategoria" Nullable="true" />
+          <Property Type="String" Name="DescSubcategoria" Nullable="true" MaxLength="1000" />
+          <Property Type="String" Name="DescCategoria" Nullable="true" MaxLength="500" />
+        </ComplexType>
+        <ComplexType Name="CategoryFilter">
+          <Property Type="Int32" Name="idCategoria" Nullable="false" />
+          <Property Type="Int32" Name="Cantidad" Nullable="false" />
+          <Property Type="String" Name="DescCategoria" Nullable="true" MaxLength="500" />
+          <Property Type="Int32" Name="idSubcategoria" Nullable="true" />
+          <Property Type="String" Name="DescSubcategoria" Nullable="true" MaxLength="1000" />
+        </ComplexType>
+        <ComplexType Name="ProductoDetalle">
+          <Property Type="Int32" Name="ID" Nullable="false" />
+          <Property Type="String" Name="Descripcion" Nullable="true" MaxLength="3000" />
+          <Property Type="String" Name="DescripcionCorta" Nullable="true" MaxLength="1000" />
+          <Property Type="String" Name="Titulo" Nullable="true" MaxLength="200" />
+          <Property Type="Decimal" Name="Precio" Nullable="true" Precision="18" Scale="2" />
+          <Property Type="String" Name="Moneda" Nullable="true" MaxLength="32" />
+          <Property Type="String" Name="DimensionesPaquete" Nullable="true" MaxLength="32" />
+          <Property Type="String" Name="Conservacion" Nullable="true" MaxLength="32" />
+          <Property Type="String" Name="Caducidad" Nullable="true" MaxLength="32" />
+          <Property Type="Int32" Name="UnidadesPaquete" Nullable="true" />
+          <Property Type="String" Name="Formato" Nullable="false" MaxLength="1" />
+          <Property Type="Int32" Name="Peso" Nullable="true" />
+          <Property Type="String" Name="TIPOPRODUCTO" Nullable="false" MaxLength="1" />
+          <Property Type="Int32" Name="IdTienda" Nullable="true" />
+          <Property Type="String" Name="UrlProducto" Nullable="true" MaxLength="500" />
+        </ComplexType>
+        <ComplexType Name="GetStore_Result">
+          <Property Type="Int32" Name="id" Nullable="false" />
+          <Property Type="String" Name="Nombre" Nullable="true" MaxLength="32" />
+          <Property Type="String" Name="Descripcion" Nullable="true" MaxLength="100" />
+          <Property Type="String" Name="Direccion" Nullable="true" MaxLength="64" />
+          <Property Type="String" Name="CoordenadasMaps" Nullable="true" MaxLength="500" />
+          <Property Type="Int32" Name="IdLocalidad" Nullable="true" />
+          <Property Type="String" Name="UrlOrchard" Nullable="true" MaxLength="1000" />
+          <Property Type="Decimal" Name="ratting" Nullable="false" Precision="2" Scale="1" />
+        </ComplexType>
+        <ComplexType Name="GetProductosImagenes_Result">
+          <Property Type="Int32" Name="Id" Nullable="false" />
+          <Property Type="Int32" Name="IdProducto" Nullable="false" />
+          <Property Type="String" Name="Url" Nullable="true" MaxLength="200" />
+        </ComplexType>
+        <EntityType Name="VENDEDORES">
+          <Key>
+            <PropertyRef Name="OrchardId" />
+          </Key>
+          <Property Type="String" Name="OrchardId" Nullable="false" MaxLength="200" FixedLength="false" Unicode="false" />
+          <Property Type="Int32" Name="Estado" />
+          <Property Type="String" Name="Nombre" MaxLength="200" FixedLength="false" Unicode="false" />
+          <Property Type="String" Name="Direccion" MaxLength="200" FixedLength="false" Unicode="false" />
+          <Property Type="Int32" Name="TipoCuenta" Nullable="false" />
+        </EntityType>
+        </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="MesModelStoreContainer" CdmEntityContainer="Entities">
+          <EntitySetMapping Name="CERTIFICADOS">
+            <EntityTypeMapping TypeName="MesModel.CERTIFICADOS">
+              <MappingFragment StoreEntitySet="CERTIFICADOS">
+                <ScalarProperty Name="Delete_dt" ColumnName="Delete_dt" />
+                <ScalarProperty Name="Delete_id" ColumnName="Delete_id" />
+                <ScalarProperty Name="Update_dt" ColumnName="Update_dt" />
+                <ScalarProperty Name="Update_Id" ColumnName="Update_Id" />
+                <ScalarProperty Name="Create_dt" ColumnName="Create_dt" />
+                <ScalarProperty Name="Create_id" ColumnName="Create_id" />
+                <ScalarProperty Name="Descripcion" ColumnName="Descripcion" />
+                <ScalarProperty Name="IdTipoCertificado" ColumnName="IdTipoCertificado" />
+                <ScalarProperty Name="ID" ColumnName="ID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="COMUNIDADES">
+            <EntityTypeMapping TypeName="MesModel.COMUNIDADES">
+              <MappingFragment StoreEntitySet="COMUNIDADES">
+                <ScalarProperty Name="Url" ColumnName="Url" />
+                <ScalarProperty Name="Delete_dt" ColumnName="Delete_dt" />
+                <ScalarProperty Name="Delete_id" ColumnName="Delete_id" />
+                <ScalarProperty Name="Update_dt" ColumnName="Update_dt" />
+                <ScalarProperty Name="Update_id" ColumnName="Update_id" />
+                <ScalarProperty Name="Create_dt" ColumnName="Create_dt" />
+                <ScalarProperty Name="Create_id" ColumnName="Create_id" />
+                <ScalarProperty Name="Descripcion" ColumnName="Descripcion" />
+                <ScalarProperty Name="IdPais" ColumnName="IdPais" />
+                <ScalarProperty Name="ID" ColumnName="ID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="DES_TIPOTEXTO">
+            <EntityTypeMapping TypeName="MesModel.DES_TIPOTEXTO">
+              <MappingFragment StoreEntitySet="DES_TIPOTEXTO">
+                <ScalarProperty Name="Delete_dt" ColumnName="Delete_dt" />
+                <ScalarProperty Name="Delete_id" ColumnName="Delete_id" />
+                <ScalarProperty Name="Update_dt" ColumnName="Update_dt" />
+                <ScalarProperty Name="Update_Id" ColumnName="Update_Id" />
+                <ScalarProperty Name="Create_dt" ColumnName="Create_dt" />
+                <ScalarProperty Name="Create_id" ColumnName="Create_id" />
+                <ScalarProperty Name="Descripcon" ColumnName="Descripcon" />
+                <ScalarProperty Name="ID" ColumnName="ID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="FORMATOS">
+            <EntityTypeMapping TypeName="MesModel.FORMATOS">
+              <MappingFragment StoreEntitySet="FORMATOS">
+                <ScalarProperty Name="Delete_dt" ColumnName="Delete_dt" />
+                <ScalarProperty Name="Delete_id" ColumnName="Delete_id" />
+                <ScalarProperty Name="Update_dt" ColumnName="Update_dt" />
+                <ScalarProperty Name="Update_Id" ColumnName="Update_Id" />
+                <ScalarProperty Name="Create_dt" ColumnName="Create_dt" />
+                <ScalarProperty Name="Create_id" ColumnName="Create_id" />
+                <ScalarProperty Name="Descripcion" ColumnName="Descripcion" />
+                <ScalarProperty Name="ID" ColumnName="ID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="IMAGENES_PRODUCTOS">
+            <EntityTypeMapping TypeName="MesModel.IMAGENES_PRODUCTOS">
+              <MappingFragment StoreEntitySet="IMAGENES_PRODUCTOS">
+                <ScalarProperty Name="Url" ColumnName="Url" />
+                <ScalarProperty Name="IdProducto" ColumnName="IdProducto" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="LOCALIDADES">
+            <EntityTypeMapping TypeName="MesModel.LOCALIDADES">
+              <MappingFragment StoreEntitySet="LOCALIDADES">
+                <ScalarProperty Name="UrlOrchard" ColumnName="UrlOrchard" />
+                <ScalarProperty Name="Delete_dt" ColumnName="Delete_dt" />
+                <ScalarProperty Name="Delete_id" ColumnName="Delete_id" />
+                <ScalarProperty Name="Update_dt" ColumnName="Update_dt" />
+                <ScalarProperty Name="Update_id" ColumnName="Update_id" />
+                <ScalarProperty Name="Create_dt" ColumnName="Create_dt" />
+                <ScalarProperty Name="Create_id" ColumnName="Create_id" />
+                <ScalarProperty Name="Descripcion" ColumnName="Descripcion" />
+                <ScalarProperty Name="IdComunidad" ColumnName="IdComunidad" />
+                <ScalarProperty Name="ID" ColumnName="ID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="PAISES">
+            <EntityTypeMapping TypeName="MesModel.PAISES">
+              <MappingFragment StoreEntitySet="PAISES">
+                <ScalarProperty Name="Codigo" ColumnName="Codigo" />
+                <ScalarProperty Name="Delete_dt" ColumnName="Delete_dt" />
+                <ScalarProperty Name="Delete_id" ColumnName="Delete_id" />
+                <ScalarProperty Name="Update_dt" ColumnName="Update_dt" />
+                <ScalarProperty Name="Update_id" ColumnName="Update_id" />
+                <ScalarProperty Name="Create_dt" ColumnName="Create_dt" />
+                <ScalarProperty Name="Create_id" ColumnName="Create_id" />
+                <ScalarProperty Name="Decripcion" ColumnName="Decripcion" />
+                <ScalarProperty Name="ID" ColumnName="ID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="sysdiagrams">
+            <EntityTypeMapping TypeName="MesModel.sysdiagrams">
+              <MappingFragment StoreEntitySet="sysdiagrams">
+                <ScalarProperty Name="definition" ColumnName="definition" />
+                <ScalarProperty Name="version" ColumnName="version" />
+                <ScalarProperty Name="diagram_id" ColumnName="diagram_id" />
+                <ScalarProperty Name="principal_id" ColumnName="principal_id" />
+                <ScalarProperty Name="name" ColumnName="name" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="TIPOCERTIFICADO">
+            <EntityTypeMapping TypeName="MesModel.TIPOCERTIFICADO">
+              <MappingFragment StoreEntitySet="TIPOCERTIFICADO">
+                <ScalarProperty Name="Delete_dt" ColumnName="Delete_dt" />
+                <ScalarProperty Name="Delete_id" ColumnName="Delete_id" />
+                <ScalarProperty Name="Update_dt" ColumnName="Update_dt" />
+                <ScalarProperty Name="Update_Id" ColumnName="Update_Id" />
+                <ScalarProperty Name="Create_dt" ColumnName="Create_dt" />
+                <ScalarProperty Name="Create_id" ColumnName="Create_id" />
+                <ScalarProperty Name="Descripcion" ColumnName="Descripcion" />
+                <ScalarProperty Name="ID" ColumnName="ID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="TIPOPRODUCTO">
+            <EntityTypeMapping TypeName="MesModel.TIPOPRODUCTO">
+              <MappingFragment StoreEntitySet="TIPOPRODUCTO">
+                <ScalarProperty Name="IdCategoria" ColumnName="IdCategoria" />
+                <ScalarProperty Name="Delete_dt" ColumnName="Delete_dt" />
+                <ScalarProperty Name="Delete_id" ColumnName="Delete_id" />
+                <ScalarProperty Name="Update_dt" ColumnName="Update_dt" />
+                <ScalarProperty Name="Update_Id" ColumnName="Update_Id" />
+                <ScalarProperty Name="Create_dt" ColumnName="Create_dt" />
+                <ScalarProperty Name="Create_id" ColumnName="Create_id" />
+                <ScalarProperty Name="Descripcion" ColumnName="Descripcion" />
+                <ScalarProperty Name="ID" ColumnName="ID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <FunctionImportMapping FunctionImportName="ProductSearch" FunctionName="MesModel.Store.SPR_Productos">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="MesModel.ProductSearch_Result">
+                <ScalarProperty Name="DescStore" ColumnName="DescStore" />
+                <ScalarProperty Name="DescProduct" ColumnName="DescProduct" />
+                <ScalarProperty Name="TitleProduct" ColumnName="TitleProduct" />
+                <ScalarProperty Name="Rate" ColumnName="Rate" />
+                <ScalarProperty Name="UrlStore" ColumnName="UrlStore" />
+                <ScalarProperty Name="UrlProduct" ColumnName="UrlProduct" />
+                <ScalarProperty Name="Price" ColumnName="Price" />
+                <ScalarProperty Name="PriceBase" ColumnName="PriceBase" />
+                <ScalarProperty Name="Money" ColumnName="Money" />
+                <ScalarProperty Name="idTienda" ColumnName="idTienda" />
+                <ScalarProperty Name="ProductPicture" ColumnName="ProductPicture" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <EntitySetMapping Name="CATEGORIAS_TIPOSPRODUCTO">
+            <EntityTypeMapping TypeName="MesModel.CATEGORIAS_TIPOSPRODUCTO">
+              <MappingFragment StoreEntitySet="CATEGORIAS_TIPOSPRODUCTO">
+                <ScalarProperty Name="Descripcion" ColumnName="Descripcion" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="PRODUCTOS">
+            <EntityTypeMapping TypeName="MesModel.PRODUCTOS">
+              <MappingFragment StoreEntitySet="PRODUCTOS">
+                <ScalarProperty Name="UrlProducto" ColumnName="UrlProducto" />
+                <ScalarProperty Name="Titulo" ColumnName="Titulo" />
+                <ScalarProperty Name="DescripcionCorta" ColumnName="DescripcionCorta" />
+                <ScalarProperty Name="Descripcion" ColumnName="Descripcion" />
+                <ScalarProperty Name="Delete_dt" ColumnName="Delete_dt" />
+                <ScalarProperty Name="Delete_id" ColumnName="Delete_id" />
+                <ScalarProperty Name="Update_dt" ColumnName="Update_dt" />
+                <ScalarProperty Name="Update_Id" ColumnName="Update_Id" />
+                <ScalarProperty Name="Create_dt" ColumnName="Create_dt" />
+                <ScalarProperty Name="Create_id" ColumnName="Create_id" />
+                <ScalarProperty Name="Moneda" ColumnName="Moneda" />
+                <ScalarProperty Name="Precio" ColumnName="Precio" />
+                <ScalarProperty Name="DimensionesPaquete" ColumnName="DimensionesPaquete" />
+                <ScalarProperty Name="IdCertificadoCalidad" ColumnName="IdCertificadoCalidad" />
+                <ScalarProperty Name="Conservacion" ColumnName="Conservacion" />
+                <ScalarProperty Name="Caducidad" ColumnName="Caducidad" />
+                <ScalarProperty Name="UnidadesPaquete" ColumnName="UnidadesPaquete" />
+                <ScalarProperty Name="IdFormato" ColumnName="IdFormato" />
+                <ScalarProperty Name="Peso" ColumnName="Peso" />
+                <ScalarProperty Name="IdTipoProducto" ColumnName="IdTipoProducto" />
+                <ScalarProperty Name="IdTienda" ColumnName="IdTienda" />
+                <ScalarProperty Name="ID" ColumnName="ID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="TIENDAS">
+            <EntityTypeMapping TypeName="MesModel.TIENDAS">
+              <MappingFragment StoreEntitySet="TIENDAS">
+                <ScalarProperty Name="UrlOrchard" ColumnName="UrlOrchard" />
+                <ScalarProperty Name="IdLocalidad" ColumnName="IdLocalidad" />
+                <ScalarProperty Name="IdComunidad" ColumnName="IdComunidad" />
+                <ScalarProperty Name="CoordenadasMaps" ColumnName="CoordenadasMaps" />
+                <ScalarProperty Name="IdGaleriaImagenes" ColumnName="IdGaleriaImagenes" />
+                <ScalarProperty Name="Facebook" ColumnName="Facebook" />
+                <ScalarProperty Name="Web" ColumnName="Web" />
+                <ScalarProperty Name="Telefono" ColumnName="Telefono" />
+                <ScalarProperty Name="Delete_dt" ColumnName="Delete_dt" />
+                <ScalarProperty Name="Delete_id" ColumnName="Delete_id" />
+                <ScalarProperty Name="Update_dt" ColumnName="Update_dt" />
+                <ScalarProperty Name="Update_Id" ColumnName="Update_Id" />
+                <ScalarProperty Name="Create_dt" ColumnName="Create_dt" />
+                <ScalarProperty Name="Create_id" ColumnName="Create_id" />
+                <ScalarProperty Name="Mail" ColumnName="Mail" />
+                <ScalarProperty Name="DNI" ColumnName="DNI" />
+                <ScalarProperty Name="Direccion" ColumnName="Direccion" />
+                <ScalarProperty Name="Descripcion" ColumnName="Descripcion" />
+                <ScalarProperty Name="Nombre" ColumnName="Nombre" />
+                <ScalarProperty Name="UsuarioOrchard" ColumnName="UsuarioOrchard" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="TIENDAS_TEXTOS">
+            <EntityTypeMapping TypeName="MesModel.TIENDAS_TEXTOS">
+              <MappingFragment StoreEntitySet="TIENDAS_TEXTOS">
+                <ScalarProperty Name="Delete_dt" ColumnName="Delete_dt" />
+                <ScalarProperty Name="Delete_id" ColumnName="Delete_id" />
+                <ScalarProperty Name="Update_dt" ColumnName="Update_dt" />
+                <ScalarProperty Name="Update_Id" ColumnName="Update_Id" />
+                <ScalarProperty Name="Create_dt" ColumnName="Create_dt" />
+                <ScalarProperty Name="Create_id" ColumnName="Create_id" />
+                <ScalarProperty Name="Descripcion" ColumnName="Descripcion" />
+                <ScalarProperty Name="IdTipoTexto" ColumnName="IdTipoTexto" />
+                <ScalarProperty Name="IdVendedor" ColumnName="IdVendedor" />
+                <ScalarProperty Name="ID" ColumnName="ID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <FunctionImportMapping FunctionImportName="CategorySearch" FunctionName="MesModel.Store.SPR_CATEGORIAS_TIPOSPRODUCTO">
+          <ResultMapping>
+              <ComplexTypeMapping TypeName="MesModel.SelecValue">
+                <ScalarProperty Name="Cantidad" ColumnName="Cantidad" />
+                <ScalarProperty Name="idCategoria" ColumnName="idCategoria" />
+                <ScalarProperty Name="idSubcategoria" ColumnName="idSubcategoria" />
+                <ScalarProperty Name="DescSubcategoria" ColumnName="DescSubcategoria" />
+                <ScalarProperty Name="DescCategoria" ColumnName="DescCategoria" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="StoreSearch" FunctionName="MesModel.Store.SPR_Tienda">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="MesModel.SelecValue">
+                <ScalarProperty Name="Cantidad" ColumnName="Cantidad" />
+                <ScalarProperty Name="idCategoria" ColumnName="idCategoria" />
+                <ScalarProperty Name="idSubcategoria" ColumnName="idSubcategoria" />
+                <ScalarProperty Name="DescSubcategoria" ColumnName="DescSubcategoria" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="ZoneSearch" FunctionName="MesModel.Store.SPR_Zonas">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="MesModel.SelecValue">
+                <ScalarProperty Name="Cantidad" ColumnName="Cantidad" />
+                <ScalarProperty Name="idCategoria" ColumnName="idCategoria" />
+                <ScalarProperty Name="idSubcategoria" ColumnName="idSubcategoria" />
+                <ScalarProperty Name="DescSubcategoria" ColumnName="DescSubcategoria" />
+                <ScalarProperty Name="DescCategoria" ColumnName="DescCategoria" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="GetProductosDetalle" FunctionName="MesModel.Store.SPR_ProductosDetalle">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="MesModel.ProductoDetalle">
+                <ScalarProperty Name="ID" ColumnName="ID" />
+                <ScalarProperty Name="Descripcion" ColumnName="Descripcion" />
+                <ScalarProperty Name="DescripcionCorta" ColumnName="DescripcionCorta" />
+                <ScalarProperty Name="Titulo" ColumnName="Titulo" />
+                <ScalarProperty Name="Precio" ColumnName="Precio" />
+                <ScalarProperty Name="Moneda" ColumnName="Moneda" />
+                <ScalarProperty Name="DimensionesPaquete" ColumnName="DimensionesPaquete" />
+                <ScalarProperty Name="Conservacion" ColumnName="Conservacion" />
+                <ScalarProperty Name="Caducidad" ColumnName="Caducidad" />
+                <ScalarProperty Name="UnidadesPaquete" ColumnName="UnidadesPaquete" />
+                <ScalarProperty Name="Formato" ColumnName="Formato" />
+                <ScalarProperty Name="Peso" ColumnName="Peso" />
+                <ScalarProperty Name="TIPOPRODUCTO" ColumnName="TIPOPRODUCTO" />
+                <ScalarProperty Name="IdTienda" ColumnName="IdTienda" />
+                <ScalarProperty Name="UrlProducto" ColumnName="UrlProducto" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="GetStore" FunctionName="MesModel.Store.SPR_TiendasDetalle">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="MesModel.GetStore_Result">
+                <ScalarProperty Name="id" ColumnName="id" />
+                <ScalarProperty Name="Nombre" ColumnName="Nombre" />
+                <ScalarProperty Name="Descripcion" ColumnName="Descripcion" />
+                <ScalarProperty Name="Direccion" ColumnName="Direccion" />
+                <ScalarProperty Name="CoordenadasMaps" ColumnName="CoordenadasMaps" />
+                <ScalarProperty Name="IdLocalidad" ColumnName="IdLocalidad" />
+                <ScalarProperty Name="UrlOrchard" ColumnName="UrlOrchard" />
+                <ScalarProperty Name="ratting" ColumnName="ratting" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="GetProductosImagenes" FunctionName="MesModel.Store.SPR_ProductosImagenes">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="MesModel.GetProductosImagenes_Result">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="IdProducto" ColumnName="IdProducto" />
+                <ScalarProperty Name="Url" ColumnName="Url" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <EntitySetMapping Name="VENDEDORES">
+            <EntityTypeMapping TypeName="MesModel.VENDEDORES">
+              <MappingFragment StoreEntitySet="VENDEDORES">
+                <ScalarProperty Name="TipoCuenta" ColumnName="TipoCuenta" />
+                <ScalarProperty Name="Direccion" ColumnName="Direccion" />
+                <ScalarProperty Name="Nombre" ColumnName="Nombre" />
+                <ScalarProperty Name="Estado" ColumnName="Estado" />
+                <ScalarProperty Name="OrchardId" ColumnName="OrchardId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="False" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="True" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="None" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>

@@ -1,0 +1,393 @@
+@using Mercadosfera.Services;
+@using Mercadosfera.Helpers;
+
+@functions {
+    // To support the layout classifaction below. Implementing as a razor function because we can, could otherwise be a Func<string[], string, string> in the code block following.
+    string CalcuClassify(string[] zoneNames, string classNamePrefix)
+    {
+        var zoneCounter = 0;
+        var zoneNumsFilled = string.Join("", zoneNames.Select(zoneName => { ++zoneCounter; return Model[zoneName] != null ? zoneCounter.ToString() : ""; }).ToArray());
+        return HasText(zoneNumsFilled) ? classNamePrefix + zoneNumsFilled : "";
+    }
+}
+@{
+    var settings = WorkContext.Resolve<IThemeSettingsService>().GetSettings();
+
+    /* Global includes for the theme
+    ***************************************************************/
+
+    SetMeta("charset", "utf-8");
+    SetMeta("robots", "index, follow");
+    SetMeta("X-UA-Compatible", "IE=edge,chrome=1");
+    SetMeta("viewport", "width=device-width, initial-scale=1");
+    SetMeta("apple-mobile-web-app-capable", "yes");
+
+    /* Some useful shortcuts or settings
+    ***************************************************************/
+
+    Func<dynamic, dynamic> Zone = x => Display(x); // Zone as an alias for Display to help make it obvious when we're displaying zones
+
+    /* Layout classification based on filled zones
+    ***************************************************************/
+
+    //Add classes to the wrapper div to toggle aside widget zones on and off
+    var asideClass = CalcuClassify(new[] { "AsideFirst", "AsideSecond" }, "aside-"); // for aside-1, aside-2 or aside-12 if any of the aside zones are filled
+    if (HasText(asideClass))
+    {
+        Model.Classes.Add(asideClass);
+    }
+
+    //Add classes to the wrapper div to toggle tripel widget zones on and off
+    var tripelClass = CalcuClassify(new[] { "TripelFirst", "TripelSecond", "TripelThird" }, "tripel-"); // for tripel-1, triple-2, etc. if any of the tripel zones are filled
+    if (HasText(tripelClass))
+    {
+        Model.Classes.Add(tripelClass);
+    }
+
+    //Add classes to the wrapper div to toggle quad widget zones on and off
+    var footerQuadClass = CalcuClassify(new[] { "FooterQuadFirst", "FooterQuadSecond", "FooterQuadThird", "FooterQuadFourth" }, "split-"); // for quad-1, quad-2, etc. if any of the quad zones are filled
+    if (HasText(footerQuadClass))
+    {
+        Model.Classes.Add(footerQuadClass);
+    }
+
+    /* Inserting some ad hoc shapes
+    ***************************************************************/
+
+    WorkContext.Layout.Header.Add(New.Branding(), "0"); // Site name and link to the home page
+    WorkContext.Layout.Footer.Add(New.BadgeOfHonor(), "5"); // Powered by Wiggleware
+    //WorkContext.Layout.Footer.Add(New.Switcher(), "0"); // Switcher for use in demo mode
+
+    /* Last bit of code to prep the layout wrapper
+    ***************************************************************/
+
+    Model.Id = "layout-wrapper";
+    if (settings.UseStickyFooter)
+    {
+        Model.Classes.Add("sticky-footer");
+    }
+    var tag = Tag(Model, "div"); // using Tag so the layout div gets the classes, id and other attributes added to the Model
+
+    var containerClass = settings.UseFluidLayout ? "fluid-layout" : "container";
+    var asideCssClass = ThemeHelper.GetAsideCssClass(asideClass);
+    var tripelCssClass = ThemeHelper.GetTripelCssClass(tripelClass);
+    var footerQuadCssClass = ThemeHelper.GetFooterQuadCssClass(footerQuadClass);
+    var homeUrl = Href("~/");
+}
+
+
+
+
+
+<div id="wrap" class="clr">
+    <!--primera barra de menu la que se oculta-->
+    <div id="top-bar-wrap" class="clr always-visible">
+        <div id="top-bar" class="clr container">          
+                <div id="top-bar-social" class="clr top-bar-right social-style-font_icons">
+                    <a href="http://www.twitter.com/wpexplorer" title="twitter" target="_blank">
+                        <span class="fa fa-twitter"></span>
+                    </a>
+                    <a href="http://vk.com/" title="vk" target="_blank">
+                        <span class="fa fa-vk"></span>
+                    </a>
+                    <a href="https://www.facebook.com/WPExplorerThemes" title="facebook" target="_blank">
+                        <span class="fa fa-facebook"></span>
+                    </a>
+                    <a href="https://plus.google.com/+AJClarke/posts" title="google-plus" target="_blank">
+                        <span class="fa fa-google-plus"></span>
+                    </a>
+                    <a href="http://instagram.com/" title="instagram" target="_blank">
+                        <span class="fa fa-instagram"></span>
+                    </a>
+                    <a href="http://linkedin.com/" title="linkedin" target="_blank">
+                        <span class="fa fa-linkedin"></span>
+                    </a>
+                    <a href="http://www.pinterest.com/wpexplorer/" title="pinterest" target="_blank">
+                        <span class="fa fa-pinterest"></span>
+                    </a>
+                    <a href="http://fickr.com/" title="flickr" target="_blank">
+                        <span class="fa fa-flickr"></span>
+                    </a>
+                    <a href="http://vimeo.com/" title="vimeo-square" target="_blank">
+                        <span class="fa fa-vimeo-square"></span>
+                    </a>
+                    <a href="http://feeds.feedburner.com/wpexplorer-feed" title="rss" target="_blank">
+                        <span class="fa fa-rss"></span>
+                    </a>
+                </div>
+            </div>
+            <!-- #top-bar-social -->
+        </div>
+        <!-- #top-bar -->
+    </div>
+    <!-- #top-bar-wrap -->
+</div>
+<!-- #wrap -->
+
+<div id="site-header-sticky-wrapper" class="sticky-wrapper">
+    <header id="site-header" class="clr header-one fixed-scroll" role="banner" data-position="relative" data-top="auto" style="">
+        <div id="site-header-inner" class="container clr">
+            <!-- #site-logo -->
+
+            <div id="app" class="header-one-logo">
+                <a href="@homeUrl" title="Minimal" rel="home"></a>
+                <span class="logoName">Mercadosfera</span>
+            </div>
+
+
+            <!-- #site-logo -->
+
+            <!--#site-menu-->
+            <div id="site-navigation-wrap" class="clr navbar-style-one nav-custom-height nav-dropdown-top-border">
+                <nav id="site-navigation" class="navigation main-navigation clr  site-navigation-with-search site-navigation-with-cart-icon" role="navigation">
+                    <div class="menu-main-container">
+                        @if (Model.Navigation != null)
+                        {
+                            @Zone(Model.Navigation)
+                        }
+                    </div>
+                </nav>
+            </div>
+            <!--#site-menu-->
+        </div>
+        <!-- #site-navigation-wrap -->
+
+        <!-- Mobile navigation -->
+        <div id="sidr-close"><a href="http://totaltheme.wpengine.com/base/shop/accessories/basic-peasant-shirt/#sidr-close" class="toggle-sidr-close"></a></div>
+
+        <div id="mobile-menu" class="clr">
+            <a href="http://totaltheme.wpengine.com/base/shop/accessories/basic-peasant-shirt/#sidr" class="mobile-menu-toggle"><span class="fa fa-bars"></span></a>
+            <a href="http://totaltheme.wpengine.com/base/cart/" title="Cart" class="mobile-menu-extra-icons mobile-menu-shopping-cart"><span class="fa fa-shopping-cart"></span></a>
+
+        </div>
+        <!-- #mobile-menu -->
+
+        <div id="searchform-header-replace" class="clr header-searchform-wrap">
+            <form method="get" action="~/ProductSearch" role="search" class="header-searchform" id="searchForm">
+                <input type="search" id="searchText" name="search" autocomplete="off" placeholder="B&uacute;squeda de Productos">
+            </form>
+            <span id="searchform-header-replace-close" class="fa fa-times"></span>
+        </div>
+        <!-- #searchform-header_replace -->
+        <!-- #site-header-inner -->
+    </header>
+</div>
+<!-- #header -->
+
+
+
+<div id="main" class="site-main clr ">
+
+    @if (Model.Featured != null)
+    {
+        <div id="featured">
+            <div class="row">
+                @Zone(Model.Featured)
+            </div>
+        </div>
+    }
+    @if (Model.BeforeMain != null)
+    { 
+        <div class="">
+
+            @Zone(Model.BeforeMain)
+
+
+        </div>
+    }
+    <div class="@containerClass">
+
+        <div class="row searchDiv">
+            @if (Model.AsideFirst != null)
+            {
+                <aside class="col-md-3">
+                    <div class="well well-sm">
+                        @Zone(Model.AsideFirst)&nbsp;
+                    </div>
+                </aside>
+            }
+            <div class="@asideCssClass">
+                @if (Model.Messages != null)
+                {
+                    @Zone(Model.Messages)
+                }
+                @if (Model.BeforeContent != null)
+                {
+                    @Zone(Model.BeforeContent)
+                }
+                @if (Model.Content != null)
+                {
+                    @Zone(Model.Content)
+                }              
+            </div>
+            @if (Model.AsideSecond != null)
+            {
+                <aside class="col-md-3">
+                    <div class="well well-sm">
+                        @Zone(Model.AsideSecond)&nbsp;
+                    </div>
+                </aside>
+            }
+        </div>
+        @if (Model.AfterMain != null)
+        {
+            <div class="row">
+                <div class="col-md-12">
+                    @Zone(Model.AfterMain)
+                </div>
+            </div>
+        }
+        @if (Model.TripelFirst != null || Model.TripelSecond != null || Model.TripelThird != null)
+        {
+            <hr />
+            <div class="row">
+                @if (Model.TripelFirst != null)
+                {
+                    <!-- start: Tripel -->
+                    <div class="@tripelCssClass">
+                        @Zone(Model.TripelFirst)
+                    </div>
+                    <!-- end: Tripel -->
+                }
+                @if (Model.TripelSecond != null)
+                {
+                    <!-- start: Tripel -->
+                    <div class="@tripelCssClass">
+                        @Zone(Model.TripelSecond)
+                    </div>
+                    <!-- end: Tripel -->
+                }
+                @if (Model.TripelThird != null)
+                {
+                    <!-- start: Tripel -->
+                    <div class="@tripelCssClass">
+                        @Zone(Model.TripelThird)
+                    </div>
+                    <!-- end: Tripel -->
+                }
+            </div>
+        }
+        @if (Model.FooterQuadFirst != null || Model.FooterQuadSecond != null || Model.FooterQuadThird != null || Model.FooterQuadFourth != null)
+        {
+            
+            <div class="row">
+                @if (Model.FooterQuadFirst != null)
+                {
+                    <div class="@footerQuadCssClass">
+                        @Zone(Model.FooterQuadFirst)
+                    </div>
+                }
+                @if (Model.FooterQuadSecond != null)
+                {
+                    <div class="@footerQuadCssClass">
+                        @Zone(Model.FooterQuadSecond)
+                    </div>
+                }
+                @if (Model.FooterQuadThird != null)
+                {
+                    <div class="@footerQuadCssClass">
+                        @Zone(Model.FooterQuadThird)
+                    </div>
+                }
+                @if (Model.FooterQuadFourth != null)
+                {
+                    <div class="@footerQuadCssClass">
+                        @Zone(Model.FooterQuadFourth)
+                    </div>
+                }
+            </div>
+        }
+    </div>
+    @tag.EndElement
+
+</div>
+<!-- #main-content -->
+
+
+
+@*    <div id="footer-callout-wrap" class="clr always-visible">
+        <div id="footer-callout" class="clr container">
+            <div id="footer-callout-left" class="footer-callout-content clr ">
+                Texto
+						   		
+            </div>
+            <div id="footer-callout-right" class="footer-callout-button clr">
+                <a href="http://themeforest.net/item/total-responsive-multipurpose-wordpress-theme/6339019?ref=wpexplorer" class="theme-button footer-callout-button" title="Buy Now" target="_blank">Boton</a>
+            </div>
+        </div>
+    </div>*@
+
+
+
+  @if (Model.AfterContent != null)
+                {
+                    @Zone(Model.AfterContent)
+                }
+
+
+
+<div id="footer-bottom" class="clr">
+    <div id="footer-bottom-inner" class="container clr">
+        <div id="copyright" class="clr" role="contentinfo">
+            Copyright 2014 - All Rights Reserved					  		
+           
+        </div>
+        <!-- #copyright -->
+        <div id="footer-bottom-menu" class="clr">
+
+            <div class="menu-footer-container">
+                <p>
+                    <ul id="menu-footer" class="menu">
+                        <li id="menu-item-2663" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-2663"><a href="http://totaltheme.wpengine.com/base/"><i class="fa fa-home"></i>Homepage</a></li>
+                        <li id="menu-item-3250" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-3250"><a href="http://totaltheme.wpengine.com/base/portfolio/"><i class="fa fa-briefcase"></i>Portfolio</a></li>
+                        <li id="menu-item-2573" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-2573"><a href="http://totaltheme.wpengine.com/base/blog/"><i class="fa fa-pencil"></i>Blog</a></li>
+                        <li id="menu-item-2574" class="menu-item menu-item-type-post_type menu-item-object-page current_page_parent menu-item-2574"><a href="http://totaltheme.wpengine.com/base/shop/"><i class="fa fa-shopping-cart"></i>Shop</a></li>
+
+                    </ul>
+                </p>
+                <p>
+                    <ul class="wpex-fontawesome-social-widget-ul social-style-color social-type-flat" style="padding: 0;">
+                        <li class="social-widget-facebook"><a href="https://www.facebook.com/WPExplorerThemes" title="Facebook" target="_blank"><i class="fa fa-facebook"></i></a></li>
+                        <li class="social-widget-google-plus"><a href="https://www.facebook.com/WPExplorerThemes" title="GooglePlus" target="_blank"><i class="fa fa-google-plus"></i></a></li>
+                        <li class="social-widget-pinterest"><a href="http://totaltheme.wpengine.com/base/shop/accessories/basic-peasant-shirt/www.pinterest.com/wpexplorer/" title="Pinterest" target="_blank"><i class="fa fa-pinterest"></i></a></li>
+                        <li class="social-widget-twitter"><a href="https://twitter.com/WPExplorer" title="Twitter" target="_blank"><i class="fa fa-twitter"></i></a></li>
+                        <li class="social-widget-youtube-play"><a href="https://www.youtube.com/user/wpexplorertv" title="Youtube" target="_blank"><i class="fa fa-youtube-play"></i></a></li>
+                        <li class="social-widget-rss"><a href="http://totaltheme.wpengine.com/base/shop/accessories/basic-peasant-shirt/#" title="RSS" target="_blank"><i class="fa fa-rss"></i></a></li>
+                    </ul>
+                </p>
+
+            </div>
+
+        </div>
+    </div>
+    <!-- #footer-bottom-menu -->
+</div>
+<!-- #footer-bottom-inner -->
+
+<!-- #footer-bottom -->
+
+
+
+
+
+
+
+<a href="http://totaltheme.wpengine.com/base/shop/accessories/basic-peasant-shirt/#" id="site-scroll-top" style="display: none;"><span class="fa fa-chevron-up"></span></a>
+@{
+    
+ <script type="text/javascript" src="@Href("~/Themes/Mercadosfera/Scripts/jquery.form.min.js")"></script>
+
+    <script type="text/javascript" src="@Href("~/Themes/Mercadosfera/Scripts/scripts.js")"></script>
+
+    <script type="text/javascript" src="@Href("~/Themes/Mercadosfera/Scripts/plugins.js")"></script>
+
+    <script type="text/javascript" src="@Href("~/Themes/Mercadosfera/Scripts/global.js")"></script>
+
+    <script type="text/javascript" src="@Href("~/Themes/Mercadosfera/Scripts/js_composer_front.js")"></script>
+
+    <script type="text/javascript" src="@Href("~/Themes/Mercadosfera/Scripts/bootstrap.js")"></script>
+    <script type="text/javascript" src="@Href("~/Themes/Mercadosfera/Scripts/Mes.Core.js")"></script>
+    
+ }
+
+
