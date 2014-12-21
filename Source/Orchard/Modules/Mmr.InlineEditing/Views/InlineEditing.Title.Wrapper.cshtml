@@ -1,0 +1,36 @@
+@using Orchard.ContentManagement;
+@using Orchard.Core.Contents;
+@using Orchard.Core.Title.Models;
+@using Newtonsoft.Json;
+
+@{
+    ContentItem contentItem = (ContentItem)Model.ContentItem;
+    TitlePart titlePart = contentItem.As<TitlePart>();
+    Layout.Title = Model.Title;
+}
+
+@* Only show ActionControls and only attaches the part to the knockout viewmodel if the user has EditContent permissions*@
+@if (AuthorizedFor(Permissions.EditContent) && Model.ContentItem.Id > 0)
+{
+    // Each part attaches itself to the Knockout viewmodel
+    using (Script.Foot())
+    {
+        <script type="text/javascript">
+            var tp =  inlineEditing.createTitlePart(@contentItem.Id, '@titlePart.Title', 'TitlePart');
+            inlineEditing.IEPageVM.parts().push(tp);
+        </script>
+    };
+
+    // Injecting ActionControls shape
+    @Display.InlineEditing_ActionControls(ContentItem: @contentItem, PartTypeName : "TitlePart")
+
+    <h1 class="mce_TitlePart_@contentItem.Id highlighter" id="mce_TitlePart_@contentItem.Id">
+        @Model.Title
+    </h1>
+
+
+}
+else
+{
+    <h1>@Model.Title</h1>
+}

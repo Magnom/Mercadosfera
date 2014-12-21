@@ -1,0 +1,25 @@
+﻿@using Orchard.ContentManagement;
+
+@{
+    ContentItem contentItem = (ContentItem)Model.ContentItem;
+    string partTypeName = Model.PartTypeName;
+}
+
+
+<div class="inline-editing-content-control" data-bind="visible: editorMode">
+    <ul class="actions-controls">
+        <li class="dashboard"
+            title="@T("Edit in Dashboard")">
+            @Html.ItemEditLinkWithReturnUrl(T("Edit in Dashboard").Text, contentItem)
+        </li>
+
+        <li class="info"
+            title="@("Modified")"
+            data-bind="visible: partFromIdAndTypeName(@contentItem.Id, '@partTypeName').isDirty ">
+            <i class="icon-pencil iconeditdirty">
+            </i>
+        </li>
+
+
+    </ul>
+</div>

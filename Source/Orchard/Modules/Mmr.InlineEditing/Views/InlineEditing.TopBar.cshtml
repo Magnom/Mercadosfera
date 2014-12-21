@@ -1,0 +1,149 @@
+﻿@using Orchard.ContentManagement;
+@using Orchard.Core.Contents;
+@using Orchard.Mvc.Extensions;
+@{
+    ContentItem contentItem = (ContentItem)Model.ContentItem;
+
+    // Retrieving session values. Maybe it is better using cookies.
+    // Saving has been done before through an ajax call in the ko viewModel updateSessionValues function
+    
+    var isEditorModeEnabledForThisSession = HttpContext.Current.Session["editorMode"];
+    if (isEditorModeEnabledForThisSession == null) { isEditorModeEnabledForThisSession = false; }
+
+    var isCollapsedValueForThisSession = HttpContext.Current.Session["isCollapsed"];
+    if (isCollapsedValueForThisSession == null) { isCollapsedValueForThisSession = false; }
+
+}
+
+@using (Script.Foot())
+{
+    <script type="text/javascript">
+
+    // loading values into the ko viewmodel
+    inlineEditing.IEPageVM.antiForgeryToken = '@Html.AntiForgeryTokenValueOrchard()';
+    inlineEditing.IEPageVM.updatePartsUrl = '@Url.Action("UpdateParts", "InlineEditing", new { area = "Mmr.InlineEditing" })';
+    inlineEditing.IEPageVM.updateSessionValuesUrl = '@Url.Action("UpdateSessionValues", "InlineEditing", new { area = "Mmr.InlineEditing" })';
+    inlineEditing.IEPageVM.BaseUrl = '@WorkContext.CurrentSite.BaseUrl';
+    
+
+    $(document).ready(function () {
+
+        @* higlight parts *@
+        $('.highlighter').mouseenter(function () {
+            if (inlineEditing.IEPageVM.editorMode()) {
+                $(this).effect('highlight', { color: '#c7e7c2' }, 'slow');
+            }
+        });
+
+        @* user dropdown *@
+        $('#inline-user').dropit({ triggerParentEl: 'nav' });
+
+        inlineEditing.IEPageVM.editorMode(@isEditorModeEnabledForThisSession.ToString().ToLower());
+        inlineEditing.IEPageVM.isCollapsed(@isCollapsedValueForThisSession.ToString().ToLower());
+
+        @* this is needed to update UI on first load *@
+        inlineEditing.IEPageVM.parts.valueHasMutated();
+        
+
+    });
+
+
+    @* spinner for ajax calls *@
+    $(document)
+      .ajaxStart(function () {
+          $("#icon-save").removeClass("icon-save");
+          $("#icon-save").addClass("icon-refresh icon-spin");
+      })
+      .ajaxStop(function () {
+          $("#icon-save").removeClass("icon-refresh icon-spin icon-large");
+          $("#icon-save").addClass("icon-save");
+      });
+
+    @* warning: unsaved changes*@
+    $(window).bind('beforeunload', function () {
+        if (inlineEditing.IEPageVM.isDirty()) {
+            return "@T("You have unsaved changes.Are you sure you want to leave?")";
+        }
+    });
+    </script>
+}
+
+@* This divs only shows when topbar is collapsed: iscollapsed == true *@
+<div class="inline-editing-topbar collapsedtopbar" >
+    <ul class="command-bar" >
+        <li>
+            <a href="#"
+               title="@T("Collapse toolbar")"
+               data-bind="click:toggleCollapseBar" class="collapse-button">
+                <i class="icon-chevron-right"></i>
+            </a>
+        </li>
+    </ul>
+</div>
+
+@* This divs only shows when topbar is expanded: iscollapsed == false.   data-bind=" visibleFade: !isCollapsed()" *@
+<div class="inline-editing-topbar expandedtopbar" data-bind="visible : !isCollapsed()" >
+    <ul class="command-bar">
+        @* Togle Collapse *@
+        <li>
+            <a href="#"
+               title="@T("Collapse toolbar")"
+               data-bind="click:toggleCollapseBar" class="collapse-button">
+                <i class="icon-chevron-left"></i>
+            </a>
+        </li>
+
+        @* Dashboard *@
+        <li>
+            <a href="@Url.Action("Index", "Admin", new { area = "Dashboard" })" id="dashboard-link">ss</a>
+        </li>
+
+        @* Toggle Editor Mode *@
+        <li>
+            <a href="#"
+               id="editorModeLink"
+               title="@T("Toggle Editor Mode")"
+               data-bind="click:toggleEditorMode , css: { topbaractivelink : editorMode}">
+                <i class="icon-pencil"></i> @T("Editor Mode")
+            </a>
+        </li>
+
+        @* Save Button *@
+        <li>
+            <a href="#"
+               title="@T("Update Changes")"
+               data-bind="click: saveEditedPage , visibleFade: isDirty()">
+                <i id="icon-save" class="icon-save"></i>@T("Save")
+            </a>
+        </li>
+
+        @* Cancel Button *@
+        <li>
+            <a href="#"
+               title="@T(" cancel changes")"
+               data-bind="click: cancelChanges , visibleFade: isDirty()">
+                <i id="icon-remove" class="icon-remove"></i>@T("Cancel")
+            </a>
+        </li>
+
+        @* User Info *@
+        <li id="inline-user-wrapper">
+            @Display.InlineEditing_UserMenu()
+        </li>
+
+        @* Changes Info *@
+        <li id="infoarea-wrapper">
+            <ul id="infoarea">
+                <li title="@T(" changed parts")" data-bind="visibleFade: isDirty()">
+                    <i class="icon-pencil"></i>
+                    <span class="badge badge-warning"
+                          data-bind="text: dirtyParts().length"></span>
+                </li>
+            </ul>
+        </li>
+    </ul>
+</div>
+
+@*This helps when debugging:
+    <pre data-bind="text: JSON.stringify(ko.toJS(inlineEditing.IEPageVM), null, 2)"></pre>*@
+
