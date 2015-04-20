@@ -14,7 +14,7 @@
 }
 
 @* Only show ActionControls and only attaches the part to the knockout viewmodel if the user has EditContent permissions*@
-@if (AuthorizedFor(Permissions.EditContent) && Model.ContentItem.Id > 0)
+@if (AuthorizedFor(Permissions.EditOwnContent) && Model.ContentItem.Id > 0)
 {
     // Media Library or Media Picker?
     var shellDescriptor = WorkContext.Resolve<ShellDescriptor>();

@@ -1,7 +1,9 @@
 ﻿using Orchard;
 using Orchard.ContentManagement;
+using Orchard.ContentManagement.Aspects;
 using Orchard.Core.Common.Models;
 using Orchard.Core.Common.Settings;
+using Orchard.Core.Navigation.Settings;
 using Orchard.DisplayManagement.Descriptors;
 using System;
 using System.Collections.Generic;
@@ -20,25 +22,29 @@ namespace Mmr.InlineEditing
             {
                 if (!displaying.ShapeMetadata.DisplayType.Contains("Admin"))
                 {
-                    ContentItem contentItem = (ContentItem)displaying.Shape.ContentItem; // Model.ContentItem;
-                    BodyPart bodyPart = contentItem.As<BodyPart>();
+                        ContentItem contentItem = (ContentItem)displaying.Shape.ContentItem; // Model.ContentItem;
 
-                    var typePartSettings = bodyPart.Settings.GetModel<BodyTypePartSettings>();
-                    var flavor = (typePartSettings != null && !string.IsNullOrWhiteSpace(typePartSettings.Flavor))
-                               ? typePartSettings.Flavor
-                               : bodyPart.PartDefinition.Settings.GetModel<BodyPartSettings>().FlavorDefault;
+                        //Mes customized 
+                        var owner = contentItem.As<ICommonPart>().Owner;
+                        if (!string.Equals(owner.UserName,"admin",StringComparison.InvariantCultureIgnoreCase)) {
+                        BodyPart bodyPart = contentItem.As<BodyPart>();
 
-                    if (flavor!="markdown")
-                    {
-                        displaying.ShapeMetadata.Wrappers.Add("InlineEditing_Body_Wrapper");
+                        var typePartSettings = bodyPart.Settings.GetModel<BodyTypePartSettings>();
+                        var flavor = (typePartSettings != null && !string.IsNullOrWhiteSpace(typePartSettings.Flavor))
+                                   ? typePartSettings.Flavor
+                                   : bodyPart.PartDefinition.Settings.GetModel<BodyPartSettings>().FlavorDefault;
+
+                        if (flavor!="markdown")
+                        {
+                            displaying.ShapeMetadata.Wrappers.Add("InlineEditing_Body_Wrapper");
+                        }
+                        else
+                        {
+                            displaying.ShapeMetadata.Wrappers.Add("InlineEditing_BodyMarkdown_Wrapper");
+                        }
+
+
                     }
-                    else
-                    {
-                        displaying.ShapeMetadata.Wrappers.Add("InlineEditing_BodyMarkdown_Wrapper");
-                    }
-
-
-                    
                 }
 
             });

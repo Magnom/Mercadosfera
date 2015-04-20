@@ -36,8 +36,7 @@ namespace Orchard.MediaLibrary.Controllers {
                 return new HttpUnauthorizedResult();
 
             var viewModel = new MediaManagerFolderCreateViewModel {
-                
-                Hierarchy = _mediaLibraryService.GetMediaFolders(_mediaLibraryService.GetMediaRoot(folderPath, Services.WorkContext.CurrentUser)),
+                Hierarchy = _mediaLibraryService.GetMediaFolders(folderPath, Services.WorkContext.CurrentUser),
                 FolderPath = folderPath
             };
 
@@ -53,12 +52,7 @@ namespace Orchard.MediaLibrary.Controllers {
             UpdateModel(viewModel);
 
             try {
-                if (String.IsNullOrEmpty(viewModel.FolderPath))
-                {
-                    viewModel.FolderPath = _mediaLibraryService.GetMediaRoot(viewModel.FolderPath, Services.WorkContext.CurrentUser);
-
-                }
-                _mediaLibraryService.CreateFolder(viewModel.FolderPath, viewModel.Name);
+                _mediaLibraryService.CreateFolder(viewModel.FolderPath, viewModel.Name, Services.WorkContext.CurrentUser);
                 Services.Notifier.Information(T("Media folder created"));
             }
             catch (ArgumentException argumentException) {

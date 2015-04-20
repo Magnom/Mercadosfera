@@ -1,0 +1,11 @@
+Name: HelloWorld
+AntiForgery: enabled
+Author: Bertrand Le Roy
+Website: http://weblogs.asp.net/bleroy
+Version: 0.5.0
+OrchardVersion: 0.5.0
+Description: A polite module that says hi
+Features:
+    HelloWorld:
+        Description: A polite module that says hi
+        Category: Samples

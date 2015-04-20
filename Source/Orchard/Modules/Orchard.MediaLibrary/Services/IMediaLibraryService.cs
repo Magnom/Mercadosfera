@@ -7,8 +7,10 @@ using Orchard.MediaLibrary.Factories;
 using Orchard.MediaLibrary.Models;
 using Orchard.Security;
 
-namespace Orchard.MediaLibrary.Services {
-    public interface IMediaLibraryService : IDependency {
+namespace Orchard.MediaLibrary.Services
+{
+    public interface IMediaLibraryService : IDependency
+    {
         IEnumerable<ContentTypeDefinition> GetMediaTypes();
         IContentQuery<MediaPart, MediaPartRecord> GetMediaContentItems();
         IEnumerable<MediaPart> GetMediaContentItems(string folderPath, int skip, int count, string order, string mediaType, IUser usr);
@@ -53,7 +55,7 @@ namespace Orchard.MediaLibrary.Services {
         /// </summary>
         /// <param name="relativePath">The path where to retrieve the media folder from. null means root.</param>
         /// <returns>The media folder in the given path.</returns>
-        IEnumerable<MediaFolder> GetMediaFolders(string relativePath);
+        IEnumerable<MediaFolder> GetMediaFolders(string relativePath, IUser usr );
 
         /// <summary>
         /// Retrieves the media files within a given relative path.
@@ -67,7 +69,8 @@ namespace Orchard.MediaLibrary.Services {
         /// </summary>
         /// <param name="relativePath">The path where to create the new folder. null means root.</param>
         /// <param name="folderName">The name of the folder to be created.</param>
-        void CreateFolder(string relativePath, string folderName);
+        /// /// <param name="usr">Current user.</param>
+        void CreateFolder(string relativePath, string folderName, IUser usr);
 
         /// <summary>
         /// Deletes a media folder.
